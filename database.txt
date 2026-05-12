@@ -1,0 +1,53 @@
+Users tablosu:
+
+id — otomatik artan birincil anahtar
+name — kullanıcı adı
+surname — kullanıcı soyadı
+email — benzersiz, giriş için kullanılacak
+password_hash — BCrypt ile hashlenmiş şifre
+balance — kullanıcı bakiyesi, varsayılan 0
+created_at — kayıt tarihi, otomatik atanıyor
+
+
+Scooters tablosu:
+
+id — otomatik artan birincil anahtar
+name — scooter adı/kodu (örn. SC-001)
+status — durumu (available, rented, waiting)
+battery — batarya yüzdesi (0-100)
+qr_code — benzersiz QR kod verisi
+lat — anlık konum enlemi
+lng — anlık konum boylamı
+created_at — sisteme eklenme tarihi
+
+
+Locations tablosu:
+
+id — otomatik artan birincil anahtar
+name — konum adı (örn. Kütüphane Önü)
+lat — enlem
+lng — boylam
+
+
+Rentals tablosu:
+
+id — otomatik artan birincil anahtar
+user_id — hangi kullanıcı (Users tablosuna referans)
+scooter_id — hangi scooter (Scooters tablosuna referans)
+start_date — kiralama başlangıç tarihi
+end_date — kiralama bitiş tarihi
+days — kaç günlük kiralama
+total_price — toplam ücret
+status — durumu (active, completed, cancelled)
+created_at — oluşturma tarihi
+
+
+Payments tablosu:
+
+id — otomatik artan birincil anahtar
+user_id — hangi kullanıcı (Users tablosuna referans)
+rental_id — hangi kiralama (Rentals tablosuna referans)
+amount — ödenen tutar
+card_last4 — kartın son 4 hanesi
+created_at — ödeme tarihi
+
