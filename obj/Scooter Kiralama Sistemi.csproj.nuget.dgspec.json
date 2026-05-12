@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Semih\\Desktop\\Scooter Kiralama Sistemi\\Scooter Kiralama Sistemi.csproj": {}
+    "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Scooter Kiralama Sistemi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Semih\\Desktop\\Scooter Kiralama Sistemi\\Scooter Kiralama Sistemi.csproj": {
+    "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Scooter Kiralama Sistemi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Semih\\Desktop\\Scooter Kiralama Sistemi\\Scooter Kiralama Sistemi.csproj",
+        "projectUniqueName": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Scooter Kiralama Sistemi.csproj",
         "projectName": "Scooter Kiralama Sistemi",
-        "projectPath": "C:\\Users\\Semih\\Desktop\\Scooter Kiralama Sistemi\\Scooter Kiralama Sistemi.csproj",
+        "projectPath": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Scooter Kiralama Sistemi.csproj",
         "packagesPath": "C:\\Users\\Semih\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Semih\\Desktop\\Scooter Kiralama Sistemi\\obj\\",
+        "outputPath": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Semih\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,11 +1,5 @@
 ﻿using Scooter_Kiralama_Sistemi.Helpers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
+
 
 namespace Scooter_Kiralama_Sistemi
 {
@@ -54,7 +48,7 @@ namespace Scooter_Kiralama_Sistemi
                 else
                 {
                     this.Hide();
-                    MainForm mainForm = new MainForm();
+                    MainForm mainForm = new MainForm(loggedInUser);
                     mainForm.ShowDialog();
                     this.Close();
                 }

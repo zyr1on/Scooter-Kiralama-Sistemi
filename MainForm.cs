@@ -9,13 +9,21 @@ namespace Scooter_Kiralama_Sistemi
     public partial class MainForm : Form
     {
         MapHelper mapHelper = new MapHelper();
-        public MainForm()
+        private Users currentUser; // Giriş yapan kullanıcıyı burada tutacağız, Profil kısmı bunun üzerinden dolacak.
+
+        public MainForm(Users _user)
         {
             InitializeComponent();
-            this.Controls.Add(mapHelper.gmapControl);
+            tabHarita.Controls.Add(mapHelper.gmapControl);
+
+            mapHelper.gmapControl.Dock = DockStyle.Fill;
             mapHelper.setupMap();
-            mapHelper.addMarker(40.22624, 28.87281, "Scooter #1", GMarkerGoogleType.red_dot);
-            //mapHelper.addMarker(40.22624, 28.87281, "Scooter #1"); // scooter #1 diye marker ekleyebiliriz test için
+            
+            currentUser = _user;
+            mapHelper.RefreshMapMarkers();
+            
+
+            // 4. Kullanıcıya sadece MÜSAİT scooterları gösterelim
         }
     }
 }

@@ -2,6 +2,7 @@
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
+using System.Data;
 
 namespace Scooter_Kiralama_Sistemi.Helpers
 {
@@ -92,6 +93,29 @@ namespace Scooter_Kiralama_Sistemi.Helpers
         {
             get { return gmap; }
             set;
+        }
+
+        public void RefreshMapMarkers()
+        {
+            clearMarkers(); // Önce eskileri temizle
+            DataTable dt = DatabaseHelper.GetScooters();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                double lat = Convert.ToDouble(row["lat"]);
+                double lng = Convert.ToDouble(row["lng"]);
+                string name = row["name"].ToString();
+                string status = row["status"].ToString();
+                string battery = row["battery"].ToString();
+
+
+                // Duruma göre renk seçimi
+                GMarkerGoogleType markerType = GMarkerGoogleType.green_dot; // Müsait
+                if (status == "rented") markerType = GMarkerGoogleType.red_dot; // Kiralanmış
+                if (status == "maintenance") markerType = GMarkerGoogleType.yellow_dot; // Bakımda
+
+                addMarker(lat, lng, $"{name} (Durum: {status}) \nBatarya: {battery}", markerType);
+            }
         }
 
 

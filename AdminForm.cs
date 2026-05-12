@@ -22,7 +22,7 @@ namespace Scooter_Kiralama_Sistemi
             mapHelper.addMarker(40.22624, 28.87281, "Scooter #1", GMarkerGoogleType.red_dot);
 
             LoadScooterData();
-            RefreshMapMarkers();
+            mapHelper.RefreshMapMarkers();
             LoadUserData();
 
         }
@@ -57,28 +57,7 @@ namespace Scooter_Kiralama_Sistemi
             }
         }
 
-        private void RefreshMapMarkers()
-        {
-            mapHelper.clearMarkers(); // Önce eskileri temizle
-            DataTable dt = DatabaseHelper.GetScooters();
-
-            foreach (DataRow row in dt.Rows)
-            {
-                double lat = Convert.ToDouble(row["lat"]);
-                double lng = Convert.ToDouble(row["lng"]);
-                string name = row["name"].ToString();
-                string status = row["status"].ToString();
-                string battery = row["battery"].ToString();
-
-
-                // Duruma göre renk seçimi
-                GMarkerGoogleType markerType = GMarkerGoogleType.green_dot; // Müsait
-                if (status == "rented") markerType = GMarkerGoogleType.red_dot; // Kiralanmış
-                if (status == "maintenance") markerType = GMarkerGoogleType.yellow_dot; // Bakımda
-
-                mapHelper.addMarker(lat, lng, $"{name} (Durum: {status}) \nBatarya: {battery}", markerType);
-            }
-        }
+        
 
         private void btnScooterEkle_Click(object sender, EventArgs e)
         {
@@ -96,7 +75,7 @@ namespace Scooter_Kiralama_Sistemi
 
 
                 LoadScooterData();   // Tablo güncellensin
-                RefreshMapMarkers(); // Haritada yeni scooter görünsün
+                mapHelper.RefreshMapMarkers(); // Haritada yeni scooter görünsün
 
 
                 txtScooterName.Clear();
@@ -218,7 +197,7 @@ namespace Scooter_Kiralama_Sistemi
                     {
                         MessageBox.Show("Scooter başarıyla silindi.");
                         LoadScooterData();   // Tabloyu tazele
-                        RefreshMapMarkers(); // Haritayı güncelle
+                        mapHelper.RefreshMapMarkers(); // Haritayı güncelle
                     }
                     else
                     {
