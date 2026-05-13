@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using System.Data;
+using System.Data.SQLite;
 
 namespace Scooter_Kiralama_Sistemi.Helpers
 {
@@ -238,6 +239,25 @@ namespace Scooter_Kiralama_Sistemi.Helpers
                 AddUser("Can", "Karakoç", "032390031@ogr.uludag.edu.tr", "password", UserRole.Admin);
             }
         }
+        public static DataRow GetScooterById(int id)
+        {
+            using var con = GetConnection();
+            con.Open();
+            using var cmd = con.CreateCommand();
+
+            cmd.CommandText = "SELECT * FROM Scooters WHERE id = $id";
+            cmd.Parameters.AddWithValue("$id", id);
+
+            using var reader = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(reader);
+
+            // Eğer scooter bulunduysa ilk satırı döndür, yoksa null
+            if (dt.Rows.Count > 0)
+                return dt.Rows[0];
+
+            return null;
+        }
 
         public static DataTable GetScooters()
         {
@@ -336,6 +356,158 @@ namespace Scooter_Kiralama_Sistemi.Helpers
                 return false;
             }
         }
+
+        public static DataTable GetAllRentals()
+        {
+            using var con = GetConnection();
+            con.Open();
+            using var cmd = con.CreateCommand();
+
+            // Kullanıcı adı ve Scooter adını da görmek için JOIN kullanıyoruz
+            // Bu sayede tabloda sadece ID'ler değil, isimler de görünür
+            cmd.CommandText = @"
+        SELECT 
+            r.id AS 'Kiralama ID', 
+            u.name || ' ' || u.surname AS 'Müşteri', 
+            s.name AS 'Scooter', 
+            r.start_date AS 'Başlangıç', 
+            r.end_date AS 'Bitiş', 
+            r.total_price AS 'Ücret (TL)', 
+            r.status AS 'Durum'
+        FROM Rentals r
+        JOIN Users u ON r.user_id = u.id
+        JOIN Scooters s ON r.scooter_id = s.id
+        ORDER BY r.created_at DESC";
+
+            using var reader = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(reader);
+
+            return dt;
+        }
+
+        public static Rentals getActiveRental(int userId)
+        {
+            Rentals rental = null;
+            using var con = GetConnection();
+            con.Open();
+            using var cmd = con.CreateCommand();
+
+            // ScooterGo projesi için aktif kiralamayı detaylarıyla çekiyoruz
+            cmd.CommandText = @"
+        SELECT r.*, s.name as scooter_name, s.qr_code 
+        FROM Rentals r 
+        JOIN Scooters s ON r.scooter_id = s.id 
+        WHERE r.user_id = @userId AND r.status = 'active' 
+        LIMIT 1";
+
+            cmd.Parameters.AddWithValue("@userId", userId);
+
+            using var reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                rental = new Rentals
+                {
+                    id = Convert.ToInt32(reader["id"]),
+                    scooter_id = Convert.ToInt32(reader["scooter_id"]),
+                    scooter_name = reader["scooter_name"].ToString(),
+                    qr_code = reader["qr_code"].ToString(),
+                    start_date = reader["start_date"].ToString(),
+                    end_date = reader["end_date"].ToString(),
+                    total_price = Convert.ToDouble(reader["total_price"]),
+                    status = reader["status"].ToString()
+                };
+            }
+            return rental;
+        }
+
+        public static bool RentScooter(int userId, int scooterId, int days, double totalPrice)
+        {
+            using var con = GetConnection();
+            con.Open();
+
+            // İşlemlerin yarım kalmaması için Transaction başlatıyoruz
+            using var transaction = con.BeginTransaction();
+            try
+            {
+                using var cmd = con.CreateCommand();
+
+                // 1. Rentals tablosuna yeni kiralama kaydı ekle
+                // end_date'i SQLite'ın datetime fonksiyonuyla (şu an + gün sayısı) hesaplıyoruz
+                cmd.CommandText = @"
+            INSERT INTO Rentals (user_id, scooter_id, days, total_price, status, start_date, end_date) 
+            VALUES (@uId, @sId, @days, @price, 'active', 
+                    datetime('now', 'localtime'), 
+                    datetime('now', 'localtime', @dayStr))";
+
+                cmd.Parameters.AddWithValue("@uId", userId);
+                cmd.Parameters.AddWithValue("@sId", scooterId);
+                cmd.Parameters.AddWithValue("@days", days);
+                cmd.Parameters.AddWithValue("@price", totalPrice);
+                cmd.Parameters.AddWithValue("@dayStr", "+" + days + " days");
+
+                cmd.ExecuteNonQuery();
+
+                // 2. Scooters tablosunda scooter'ın durumunu 'rented' olarak güncelle
+                using var updateCmd = con.CreateCommand();
+                updateCmd.CommandText = "UPDATE Scooters SET status = 'rented' WHERE id = @sId";
+                updateCmd.Parameters.AddWithValue("@sId", scooterId);
+                updateCmd.ExecuteNonQuery();
+
+                // Her iki işlem de başarılıysa onayla
+                transaction.Commit();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Bir hata oluşursa yapılan tüm değişiklikleri geri al
+                transaction.Rollback();
+                Console.WriteLine("Kiralama Hatası: " + ex.Message);
+                return false;
+            }
+        }
+
+        public static bool EndRental(int rentalId)
+        {
+            using var con = GetConnection();
+            con.Open();
+            using var transaction = con.BeginTransaction();
+            try
+            {
+                // 1. Scooter'ı tekrar müsait (available) hale getir
+                // Scooter ID'sini doğrudan Rentals tablosundan alt sorgu (subquery) ile buluyoruz
+                using var cmdScooter = con.CreateCommand();
+                cmdScooter.CommandText = @"
+            UPDATE Scooters 
+            SET status = 'available' 
+            WHERE id = (SELECT scooter_id FROM Rentals WHERE id = $rentalId)";
+                cmdScooter.Parameters.AddWithValue("$rentalId", rentalId);
+                cmdScooter.ExecuteNonQuery();
+
+                // 2. Kiralamayı sonlandır (status = 'finished' yap ve bitiş tarihini şu an olarak güncelle)
+                using var cmdRental = con.CreateCommand();
+                cmdRental.CommandText = @"
+            UPDATE Rentals 
+            SET status = 'finished', end_date = datetime('now', 'localtime') 
+            WHERE id = $rentalId";
+                cmdRental.Parameters.AddWithValue("$rentalId", rentalId);
+                cmdRental.ExecuteNonQuery();
+
+                // İki işlem de sorunsuz çalıştıysa kaydet
+                transaction.Commit();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                Console.WriteLine("Kiralama Sonlandırma Hatası: " + ex.Message);
+                return false;
+            }
+        }
+
+
+
+
 
 
     }

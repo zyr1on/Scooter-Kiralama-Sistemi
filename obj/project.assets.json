@@ -122,6 +122,19 @@
           }
         }
       },
+      "QRCoder/1.8.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/QRCoder.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/QRCoder.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "runtime.native.System.Data.SqlClient.sni/4.7.0": {
         "type": "package",
         "dependencies": {
@@ -724,6 +737,34 @@
         "packageIcon.png"
       ]
     },
+    "QRCoder/1.8.0": {
+      "sha512": "RuvX3PEXU6pbY/I5ItAk800jm62r+YnoPLgyS2WTgwxkOnGkOfU9ORiipHUF0LkLyqM8rlroUCA319JjRYfRFQ==",
+      "type": "package",
+      "path": "qrcoder/1.8.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "lib/net35/QRCoder.dll",
+        "lib/net35/QRCoder.xml",
+        "lib/net40/QRCoder.dll",
+        "lib/net40/QRCoder.xml",
+        "lib/net5.0/QRCoder.dll",
+        "lib/net5.0/QRCoder.xml",
+        "lib/net6.0/QRCoder.dll",
+        "lib/net6.0/QRCoder.xml",
+        "lib/netstandard1.3/QRCoder.dll",
+        "lib/netstandard1.3/QRCoder.xml",
+        "lib/netstandard2.0/QRCoder.dll",
+        "lib/netstandard2.0/QRCoder.xml",
+        "lib/netstandard2.1/QRCoder.dll",
+        "lib/netstandard2.1/QRCoder.xml",
+        "nuget-icon.png",
+        "qrcoder.1.8.0.nupkg.sha512",
+        "qrcoder.nuspec"
+      ]
+    },
     "runtime.native.System.Data.SqlClient.sni/4.7.0": {
       "sha512": "9kyFSIdN3T0qjDQ2R0HRXYIhS3l5psBzQi6qqhdLz+SzFyEy4sVxNOke+yyYv8Cu8rPER12c3RDjLT8wF3WBYQ==",
       "type": "package",
@@ -1222,6 +1263,7 @@
       "BCrypt.Net-Next >= 4.1.0",
       "GMap.NET.WinForms >= 2.1.7",
       "Microsoft.Data.Sqlite >= 10.0.5",
+      "QRCoder >= 1.8.0",
       "SQLitePCLRaw.bundle_e_sqlcipher >= 2.1.11"
     ]
   },
@@ -1281,6 +1323,10 @@
           "Microsoft.Data.Sqlite": {
             "target": "Package",
             "version": "[10.0.5, )"
+          },
+          "QRCoder": {
+            "target": "Package",
+            "version": "[1.8.0, )"
           },
           "SQLitePCLRaw.bundle_e_sqlcipher": {
             "target": "Package",

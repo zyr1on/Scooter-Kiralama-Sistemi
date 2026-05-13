@@ -359,6 +359,7 @@
             btnKiralamaSonlandir.TabIndex = 0;
             btnKiralamaSonlandir.Text = "Kiralamaları Sonlandır";
             btnKiralamaSonlandir.UseVisualStyleBackColor = true;
+            btnKiralamaSonlandir.Click += btnKiralamaSonlandir_Click;
             // 
             // dgvKiralamalar
             // 

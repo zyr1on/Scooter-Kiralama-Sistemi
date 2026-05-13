@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Scooter Kiralama Sistemi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d161214fb376eaa6eead02bba3f10fff77e4d4e6")]
 [assembly: System.Reflection.AssemblyProductAttribute("Scooter Kiralama Sistemi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Scooter Kiralama Sistemi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -34,7 +34,7 @@ namespace Scooter_Kiralama_Sistemi.Helpers
             gmap.DragButton = MouseButtons.Left;
         }
 
-        public void addMarker(double lat, double lng, string tooltip)
+        public void addMarker(int id, double lat, double lng, string tooltip)
         {
             var marker = new GMarkerGoogle(
                 new PointLatLng(lat, lng),
@@ -42,9 +42,12 @@ namespace Scooter_Kiralama_Sistemi.Helpers
             );
             marker.ToolTipText = tooltip;
             marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
+            marker.Tag = id; // Tıklama olayında ID'yi yakalamak için
             overlay.Markers.Add(marker);
         }
-        public void addMarker(double lat, double lng, string tooltip,Bitmap bitmap)
+
+        // YENİ: int id parametresi eklendi ve Tag'e atandı
+        public void addMarker(int id, double lat, double lng, string tooltip, Bitmap bitmap)
         {
             var marker = new GMarkerGoogle(
                 new PointLatLng(lat, lng),
@@ -52,9 +55,12 @@ namespace Scooter_Kiralama_Sistemi.Helpers
             );
             marker.ToolTipText = tooltip;
             marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
+            marker.Tag = id; // Tıklama olayında ID'yi yakalamak için
             overlay.Markers.Add(marker);
         }
-        public void addMarker(double lat, double lng, string tooltip,GMarkerGoogleType markertype)
+
+        // YENİ: int id parametresi eklendi ve Tag'e atandı
+        public void addMarker(int id, double lat, double lng, string tooltip, GMarkerGoogleType markertype)
         {
             var marker = new GMarkerGoogle(
                 new PointLatLng(lat, lng),
@@ -62,9 +68,10 @@ namespace Scooter_Kiralama_Sistemi.Helpers
             );
             marker.ToolTipText = tooltip;
             marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
+            marker.Tag = id; // Tıklama olayında ID'yi yakalamak için
             overlay.Markers.Add(marker);
         }
-        
+
         //public void addMarkerScooterIcon(double lat, double lng, string tooltip)
         //{
         //    var marker = new GMarkerGoogle(
@@ -76,7 +83,7 @@ namespace Scooter_Kiralama_Sistemi.Helpers
         //    overlay.Markers.Add(marker);
         //}
 
-        
+
 
         public void clearMarkers()
         {
@@ -102,19 +109,22 @@ namespace Scooter_Kiralama_Sistemi.Helpers
 
             foreach (DataRow row in dt.Rows)
             {
+                // YENİ: Veritabanından scooter id'sini alıyoruz
+                int id = Convert.ToInt32(row["id"]);
+
                 double lat = Convert.ToDouble(row["lat"]);
                 double lng = Convert.ToDouble(row["lng"]);
                 string name = row["name"].ToString();
                 string status = row["status"].ToString();
                 string battery = row["battery"].ToString();
 
-
                 // Duruma göre renk seçimi
                 GMarkerGoogleType markerType = GMarkerGoogleType.green_dot; // Müsait
                 if (status == "rented") markerType = GMarkerGoogleType.red_dot; // Kiralanmış
                 if (status == "maintenance") markerType = GMarkerGoogleType.yellow_dot; // Bakımda
 
-                addMarker(lat, lng, $"{name} (Durum: {status}) \nBatarya: {battery}", markerType);
+                // YENİ: addMarker metoduna ilk parametre olarak 'id' değişkenini gönderiyoruz
+                addMarker(id, lat, lng, $"{name} (Durum: {status}) \nBatarya: {battery}", markerType);
             }
         }
 

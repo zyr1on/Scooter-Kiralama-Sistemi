@@ -61,13 +61,7 @@ namespace Scooter_Kiralama_Sistemi
             }
         }
 
-        private void lblGoToRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            pnlLogin.Visible = false;
-            pnlRegister.Visible = true;
-            pnlRegister.Location = pnlLogin.Location;
-            this.AcceptButton = btnRegister;
-        }
+        
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
@@ -103,6 +97,22 @@ namespace Scooter_Kiralama_Sistemi
 
 
 
+        }
+
+
+        private void lblGoToRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            pnlLogin.Visible = false;
+            pnlRegister.Visible = true;
+            pnlRegister.Location = pnlLogin.Location;
+            this.AcceptButton = btnRegister;
+        }
+
+        private void lblGoToLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            pnlLogin.Visible = true;
+            pnlRegister.Visible = false;
+            this.AcceptButton = btnLogin;
         }
 
         // DataBase için Register yapısı eklenmeli

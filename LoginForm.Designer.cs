@@ -36,6 +36,7 @@
             pictureBox2 = new PictureBox();
             pictureBox3 = new PictureBox();
             pnlRegister = new Panel();
+            lblGoToLogin = new LinkLabel();
             label5 = new Label();
             txtPassRegister = new TextBox();
             label4 = new Label();
@@ -61,7 +62,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.ForeColor = Color.Transparent;
-            label1.Location = new Point(17, 14);
+            label1.Location = new Point(26, 14);
             label1.Name = "label1";
             label1.Size = new Size(22, 15);
             label1.TabIndex = 0;
@@ -72,7 +73,7 @@
             txtName.BackColor = Color.FromArgb(27, 38, 59);
             txtName.BorderStyle = BorderStyle.None;
             txtName.ForeColor = Color.White;
-            txtName.Location = new Point(17, 32);
+            txtName.Location = new Point(26, 32);
             txtName.Name = "txtName";
             txtName.Size = new Size(280, 16);
             txtName.TabIndex = 1;
@@ -82,9 +83,9 @@
             btnRegister.BackColor = Color.FromArgb(96, 165, 250);
             btnRegister.FlatAppearance.BorderSize = 0;
             btnRegister.FlatStyle = FlatStyle.Flat;
-            btnRegister.Location = new Point(7, 204);
+            btnRegister.Location = new Point(0, 204);
             btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(324, 33);
+            btnRegister.Size = new Size(360, 33);
             btnRegister.TabIndex = 4;
             btnRegister.Text = "Kayıt Ol";
             btnRegister.UseVisualStyleBackColor = false;
@@ -104,9 +105,9 @@
             // 
             pictureBox2.BackColor = Color.FromArgb(4, 25, 53);
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(581, 23);
+            pictureBox2.Location = new Point(584, 0);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(351, 446);
+            pictureBox2.Size = new Size(360, 533);
             pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox2.TabIndex = 6;
             pictureBox2.TabStop = false;
@@ -124,6 +125,7 @@
             // 
             // pnlRegister
             // 
+            pnlRegister.Controls.Add(lblGoToLogin);
             pnlRegister.Controls.Add(label5);
             pnlRegister.Controls.Add(txtPassRegister);
             pnlRegister.Controls.Add(label4);
@@ -133,17 +135,28 @@
             pnlRegister.Controls.Add(txtSurname);
             pnlRegister.Controls.Add(label1);
             pnlRegister.Controls.Add(txtName);
-            pnlRegister.Location = new Point(236, 167);
+            pnlRegister.Location = new Point(147, 110);
             pnlRegister.Name = "pnlRegister";
-            pnlRegister.Size = new Size(351, 302);
+            pnlRegister.Size = new Size(360, 379);
             pnlRegister.TabIndex = 8;
+            // 
+            // lblGoToLogin
+            // 
+            lblGoToLogin.AutoSize = true;
+            lblGoToLogin.Location = new Point(138, 251);
+            lblGoToLogin.Name = "lblGoToLogin";
+            lblGoToLogin.Size = new Size(52, 15);
+            lblGoToLogin.TabIndex = 12;
+            lblGoToLogin.TabStop = true;
+            lblGoToLogin.Text = "Giriş Yap";
+            lblGoToLogin.LinkClicked += lblGoToLogin_LinkClicked;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
             label5.ForeColor = Color.Transparent;
-            label5.Location = new Point(20, 137);
+            label5.Location = new Point(26, 137);
             label5.Name = "label5";
             label5.Size = new Size(30, 15);
             label5.TabIndex = 6;
@@ -154,7 +167,7 @@
             txtPassRegister.BackColor = Color.FromArgb(27, 38, 59);
             txtPassRegister.BorderStyle = BorderStyle.None;
             txtPassRegister.ForeColor = Color.White;
-            txtPassRegister.Location = new Point(20, 155);
+            txtPassRegister.Location = new Point(26, 155);
             txtPassRegister.Name = "txtPassRegister";
             txtPassRegister.Size = new Size(280, 16);
             txtPassRegister.TabIndex = 7;
@@ -165,7 +178,7 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.ForeColor = Color.Transparent;
-            label4.Location = new Point(17, 100);
+            label4.Location = new Point(26, 96);
             label4.Name = "label4";
             label4.Size = new Size(36, 15);
             label4.TabIndex = 4;
@@ -176,7 +189,7 @@
             txtEmailRegister.BackColor = Color.FromArgb(27, 38, 59);
             txtEmailRegister.BorderStyle = BorderStyle.None;
             txtEmailRegister.ForeColor = Color.White;
-            txtEmailRegister.Location = new Point(17, 118);
+            txtEmailRegister.Location = new Point(26, 114);
             txtEmailRegister.Name = "txtEmailRegister";
             txtEmailRegister.Size = new Size(280, 16);
             txtEmailRegister.TabIndex = 5;
@@ -186,7 +199,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.ForeColor = Color.Transparent;
-            label3.Location = new Point(17, 63);
+            label3.Location = new Point(26, 59);
             label3.Name = "label3";
             label3.Size = new Size(39, 15);
             label3.TabIndex = 2;
@@ -197,7 +210,7 @@
             txtSurname.BackColor = Color.FromArgb(27, 38, 59);
             txtSurname.BorderStyle = BorderStyle.None;
             txtSurname.ForeColor = Color.White;
-            txtSurname.Location = new Point(17, 81);
+            txtSurname.Location = new Point(26, 77);
             txtSurname.Name = "txtSurname";
             txtSurname.Size = new Size(280, 16);
             txtSurname.TabIndex = 3;
@@ -210,9 +223,9 @@
             pnlLogin.Controls.Add(label7);
             pnlLogin.Controls.Add(btnLogin);
             pnlLogin.Controls.Add(txtEmailLogin);
-            pnlLogin.Location = new Point(581, 167);
+            pnlLogin.Location = new Point(584, 151);
             pnlLogin.Name = "pnlLogin";
-            pnlLogin.Size = new Size(351, 302);
+            pnlLogin.Size = new Size(360, 382);
             pnlLogin.TabIndex = 10;
             // 
             // lblGoToRegister
@@ -264,9 +277,9 @@
             btnLogin.BackColor = Color.FromArgb(96, 165, 250);
             btnLogin.FlatAppearance.BorderSize = 0;
             btnLogin.FlatStyle = FlatStyle.Flat;
-            btnLogin.Location = new Point(12, 109);
+            btnLogin.Location = new Point(0, 129);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(324, 33);
+            btnLogin.Size = new Size(369, 33);
             btnLogin.TabIndex = 4;
             btnLogin.Text = "Giriş Yap";
             btnLogin.UseVisualStyleBackColor = false;
@@ -332,5 +345,6 @@
         private Button btnLogin;
         private TextBox txtEmailLogin;
         private LinkLabel lblGoToRegister;
+        private LinkLabel lblGoToLogin;
     }
 }
