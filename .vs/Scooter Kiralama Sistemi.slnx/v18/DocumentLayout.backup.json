@@ -3,44 +3,68 @@
   "WorkspaceRootPath": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\database.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:database.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\helpers\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:helpers\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\kiralamaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:kiralamaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\kiralamaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:kiralamaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\helpers\\maphelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:helpers\\maphelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\helpers\\maphelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:helpers\\maphelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\bakiyey\u00FCklemeformu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:bakiyey\u00FCklemeformu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\bakiyey\u00FCklemeformu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:bakiyey\u00FCklemeformu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\kiralamaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:kiralamaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\helpers\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:helpers\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\helpers\\batteryscootermarker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:helpers\\batteryscootermarker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\scooter kiralama sistemi.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:scooter kiralama sistemi.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}",
+      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\scooter kiralama sistemi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:scooter kiralama sistemi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\kiralamaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:kiralamaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\helpers\\qrhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:helpers\\qrhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\LoginForm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -53,10 +77,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\helpers\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:helpers\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{32643A89-21A3-043C-9514-AE95855C6237}|Scooter Kiralama Sistemi.csproj|c:\\users\\semih\\desktop\\scooter-kiralama-sistemi\\mainform.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
@@ -82,17 +102,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 12,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-24T13:54:47.63Z",
               "IsPinned": true,
@@ -100,7 +120,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 14,
               "Title": "AdminForm.cs",
               "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\AdminForm.cs",
               "RelativeDocumentMoniker": "AdminForm.cs",
@@ -115,57 +135,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "MapHelper.cs",
-              "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Helpers\\MapHelper.cs",
-              "RelativeDocumentMoniker": "Helpers\\MapHelper.cs",
-              "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Helpers\\MapHelper.cs",
-              "RelativeToolTip": "Helpers\\MapHelper.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAowEYAAABFAAAAAAAAAA==",
+              "Title": "BatteryScooterMarker.cs",
+              "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Helpers\\BatteryScooterMarker.cs",
+              "RelativeDocumentMoniker": "Helpers\\BatteryScooterMarker.cs",
+              "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Helpers\\BatteryScooterMarker.cs",
+              "RelativeToolTip": "Helpers\\BatteryScooterMarker.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-24T14:02:18.637Z",
+              "WhenOpened": "2026-05-15T15:25:14.963Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "MainForm.cs [Tasar\u0131m]",
-              "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\MainForm.cs",
-              "RelativeDocumentMoniker": "MainForm.cs",
-              "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\MainForm.cs [Tasar\u0131m]",
-              "RelativeToolTip": "MainForm.cs [Tasar\u0131m]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-11T12:11:25.759Z",
-              "EditorCaption": " [Tasar\u0131m]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "MainForm.cs",
               "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\MainForm.cs",
               "RelativeDocumentMoniker": "MainForm.cs",
               "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\MainForm.cs",
               "RelativeToolTip": "MainForm.cs",
-              "ViewState": "AgIAAG0AAAAAAAAAAAAowIYAAAA+AAAAAAAAAA==",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAwwEsAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-11T12:11:40.256Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DatabaseHelper.cs",
-              "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Helpers\\DatabaseHelper.cs",
-              "RelativeDocumentMoniker": "Helpers\\DatabaseHelper.cs",
-              "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Helpers\\DatabaseHelper.cs",
-              "RelativeToolTip": "Helpers\\DatabaseHelper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-11T12:02:40.195Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "KiralamaForm.cs [Tasar\u0131m]",
               "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\KiralamaForm.cs",
               "RelativeDocumentMoniker": "KiralamaForm.cs",
@@ -178,6 +173,106 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "BakiyeY\u00FCklemeFormu.cs",
+              "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\BakiyeY\u00FCklemeFormu.cs",
+              "RelativeDocumentMoniker": "BakiyeY\u00FCklemeFormu.cs",
+              "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\BakiyeY\u00FCklemeFormu.cs",
+              "RelativeToolTip": "BakiyeY\u00FCklemeFormu.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAqwB4AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T15:38:39.379Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainForm.cs [Tasar\u0131m]",
+              "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\MainForm.cs",
+              "RelativeDocumentMoniker": "MainForm.cs",
+              "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\MainForm.cs [Tasar\u0131m]",
+              "RelativeToolTip": "MainForm.cs [Tasar\u0131m]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T12:11:25.759Z",
+              "EditorCaption": " [Tasar\u0131m]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MapHelper.cs",
+              "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Helpers\\MapHelper.cs",
+              "RelativeDocumentMoniker": "Helpers\\MapHelper.cs",
+              "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Helpers\\MapHelper.cs",
+              "RelativeToolTip": "Helpers\\MapHelper.cs",
+              "ViewState": "AgIAAJEAAACAjjaOWJ8pwK0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T14:02:18.637Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DatabaseHelper.cs",
+              "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Helpers\\DatabaseHelper.cs",
+              "RelativeDocumentMoniker": "Helpers\\DatabaseHelper.cs",
+              "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Helpers\\DatabaseHelper.cs",
+              "RelativeToolTip": "Helpers\\DatabaseHelper.cs",
+              "ViewState": "AgIAABoBAAAAAAAAAAAkwCUBAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T12:02:40.195Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BakiyeY\u00FCklemeFormu.cs [Tasar\u0131m]",
+              "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\BakiyeY\u00FCklemeFormu.cs",
+              "RelativeDocumentMoniker": "BakiyeY\u00FCklemeFormu.cs",
+              "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\BakiyeY\u00FCklemeFormu.cs [Tasar\u0131m]",
+              "RelativeToolTip": "BakiyeY\u00FCklemeFormu.cs [Tasar\u0131m]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T15:38:35.666Z",
+              "EditorCaption": " [Tasar\u0131m]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Scooter Kiralama Sistemi",
+              "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Scooter Kiralama Sistemi.csproj",
+              "RelativeDocumentMoniker": "Scooter Kiralama Sistemi.csproj",
+              "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Scooter Kiralama Sistemi.csproj",
+              "RelativeToolTip": "Scooter Kiralama Sistemi.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-15T15:28:39.533Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Settings.settings",
+              "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Properties\\Settings.settings",
+              "RelativeDocumentMoniker": "Properties\\Settings.settings",
+              "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Properties\\Settings.settings",
+              "RelativeToolTip": "Properties\\Settings.settings",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002767|",
+              "WhenOpened": "2026-05-15T15:29:26.645Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Scooter Kiralama Sistemi",
+              "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Scooter Kiralama Sistemi.csproj",
+              "RelativeDocumentMoniker": "Scooter Kiralama Sistemi.csproj",
+              "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Scooter Kiralama Sistemi.csproj",
+              "RelativeToolTip": "Scooter Kiralama Sistemi.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-15T15:28:36.664Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "AdminForm.cs [Tasar\u0131m]",
               "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\AdminForm.cs",
               "RelativeDocumentMoniker": "AdminForm.cs",
@@ -189,37 +284,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "database.txt",
-              "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\database.txt",
-              "RelativeDocumentMoniker": "database.txt",
-              "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\database.txt",
-              "RelativeToolTip": "database.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2026-05-13T17:50:31.299Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{c6f34f0d-7ae5-4f3a-be61-fe0c21ae9eb8}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "KiralamaForm.cs",
               "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\KiralamaForm.cs",
               "RelativeDocumentMoniker": "KiralamaForm.cs",
               "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\KiralamaForm.cs",
               "RelativeToolTip": "KiralamaForm.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAApwGMAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAABYAAAAAAAAAAAAgwGcAAABRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-13T17:39:47.993Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 15,
               "Title": "QRHelper.cs",
               "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Helpers\\QRHelper.cs",
               "RelativeDocumentMoniker": "Helpers\\QRHelper.cs",
@@ -227,24 +305,22 @@
               "RelativeToolTip": "Helpers\\QRHelper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-13T17:16:09.628Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-13T17:16:09.628Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 16,
               "Title": "LoginForm.cs [Tasar\u0131m]",
               "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\LoginForm.cs",
               "RelativeDocumentMoniker": "LoginForm.cs",
               "ToolTip": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\LoginForm.cs [Tasar\u0131m]",
               "RelativeToolTip": "LoginForm.cs [Tasar\u0131m]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-24T13:54:17.025Z",
-              "EditorCaption": " [Tasar\u0131m]"
+              "WhenOpened": "2026-03-24T13:54:17.025Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 17,
               "Title": "Rentals.cs",
               "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Helpers\\Rentals.cs",
               "RelativeDocumentMoniker": "Helpers\\Rentals.cs",
@@ -252,12 +328,11 @@
               "RelativeToolTip": "Helpers\\Rentals.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-13T17:14:33.856Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-13T17:14:33.856Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 18,
               "Title": "Users.cs",
               "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\Helpers\\Users.cs",
               "RelativeDocumentMoniker": "Helpers\\Users.cs",
@@ -265,12 +340,11 @@
               "RelativeToolTip": "Helpers\\Users.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T15:49:05.245Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-12T15:49:05.245Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "LoginForm.Designer.cs",
               "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\LoginForm.Designer.cs",
               "RelativeDocumentMoniker": "LoginForm.Designer.cs",
@@ -278,12 +352,11 @@
               "RelativeToolTip": "LoginForm.Designer.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAAwBYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T14:38:31.981Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-12T14:38:31.981Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "MainForm.resx",
               "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\MainForm.resx",
               "RelativeDocumentMoniker": "MainForm.resx",
@@ -295,7 +368,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "MainForm.Designer.cs",
               "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\MainForm.Designer.cs",
               "RelativeDocumentMoniker": "MainForm.Designer.cs",
@@ -308,7 +381,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 22,
               "Title": "AdminForm.Designer.cs",
               "DocumentMoniker": "C:\\Users\\Semih\\Desktop\\Scooter-Kiralama-Sistemi\\AdminForm.Designer.cs",
               "RelativeDocumentMoniker": "AdminForm.Designer.cs",

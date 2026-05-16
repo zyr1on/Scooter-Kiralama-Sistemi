@@ -10,7 +10,8 @@ namespace Scooter_Kiralama_Sistemi.Helpers
     {
         private GMapControl gmap;
         private GMapOverlay overlay;
-
+        public string imagePath = System.IO.Path.Combine(Application.StartupPath, "scooter.png");
+        public Bitmap scooterLogo;
         public MapHelper() {
 
             this.gmap = new GMapControl();
@@ -20,6 +21,16 @@ namespace Scooter_Kiralama_Sistemi.Helpers
             // Scooter fotosu da koyulabilir marker olarak
             // Bitmap scooterIcon = new Bitmap("scooter.png");
             // transparent olsa daha iyi olur.
+
+            if (System.IO.File.Exists(imagePath))
+            {
+                scooterLogo = new Bitmap(imagePath);
+            }
+            else
+            {
+                MessageBox.Show("file not found");
+            }
+
 
         }
 
@@ -72,17 +83,6 @@ namespace Scooter_Kiralama_Sistemi.Helpers
             overlay.Markers.Add(marker);
         }
 
-        //public void addMarkerScooterIcon(double lat, double lng, string tooltip)
-        //{
-        //    var marker = new GMarkerGoogle(
-        //        new PointLatLng(lat, lng),
-        //        scooterBitMap
-        //    );
-        //    marker.ToolTipText = tooltip;
-        //    marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
-        //    overlay.Markers.Add(marker);
-        //}
-
 
 
         public void clearMarkers()
@@ -102,6 +102,32 @@ namespace Scooter_Kiralama_Sistemi.Helpers
             set;
         }
 
+        //public void RefreshMapMarkers()
+        //{
+        //    clearMarkers(); // Önce eskileri temizle
+        //    DataTable dt = DatabaseHelper.GetScooters();
+
+        //    foreach (DataRow row in dt.Rows)
+        //    {
+        //        // YENİ: Veritabanından scooter id'sini alıyoruz
+        //        int id = Convert.ToInt32(row["id"]);
+
+        //        double lat = Convert.ToDouble(row["lat"]);
+        //        double lng = Convert.ToDouble(row["lng"]);
+        //        string name = row["name"].ToString();
+        //        string status = row["status"].ToString();
+        //        string battery = row["battery"].ToString();
+
+        //        // Duruma göre renk seçimi
+        //        GMarkerGoogleType markerType = GMarkerGoogleType.green_dot; // Müsait
+        //        if (status == "rented") markerType = GMarkerGoogleType.red_dot; // Kiralanmış
+        //        if (status == "maintenance") markerType = GMarkerGoogleType.yellow_dot; // Bakımda
+
+        //        // YENİ: addMarker metoduna ilk parametre olarak 'id' değişkenini gönderiyoruz
+        //        addMarker(id, lat, lng, $"{name} (Durum: {status}) \nBatarya: {battery}", markerType);
+        //    }
+        //}
+
         public void RefreshMapMarkers()
         {
             clearMarkers(); // Önce eskileri temizle
@@ -109,24 +135,38 @@ namespace Scooter_Kiralama_Sistemi.Helpers
 
             foreach (DataRow row in dt.Rows)
             {
-                // YENİ: Veritabanından scooter id'sini alıyoruz
                 int id = Convert.ToInt32(row["id"]);
-
                 double lat = Convert.ToDouble(row["lat"]);
                 double lng = Convert.ToDouble(row["lng"]);
                 string name = row["name"].ToString();
                 string status = row["status"].ToString();
-                string battery = row["battery"].ToString();
+                int battery = Convert.ToInt32(row["battery"]); // Bataryayı int olarak alıyoruz
 
-                // Duruma göre renk seçimi
-                GMarkerGoogleType markerType = GMarkerGoogleType.green_dot; // Müsait
-                if (status == "rented") markerType = GMarkerGoogleType.red_dot; // Kiralanmış
-                if (status == "maintenance") markerType = GMarkerGoogleType.yellow_dot; // Bakımda
+                // SADECE MÜSAİT SCOOTERLARDA BATARYA HALKASI GÖSTERELİM
+                if (status == "available")
+                {
+                    // STANDART ADDMARKER YERİNE ÖZEL MARKERIMIZI OLUŞTURUYORUZ
+                    PointLatLng pos = new PointLatLng(lat, lng);
+                    BatteryScooterMarker customMarker = new BatteryScooterMarker(pos, scooterLogo, battery);
 
-                // YENİ: addMarker metoduna ilk parametre olarak 'id' değişkenini gönderiyoruz
-                addMarker(id, lat, lng, $"{name} (Durum: {status}) \nBatarya: {battery}", markerType);
+                    // Tooltip ve Tag bilgilerini yine ekliyoruz ki tıklayınca pop-up açılsın
+                    customMarker.ToolTipText = $"{name} (Müsait) \nBatarya: %{battery}";
+                    customMarker.Tag = id; // Tıklama olayında ID'yi yakalamak için
+
+                    // Overlay'e ekle
+                    overlay.Markers.Add(customMarker);
+                }
+                // kiralanmış olan scooterlar
+                //else
+                //{
+                //    GMarkerGoogleType markerType = GMarkerGoogleType.red_dot;
+                //    if (status == "maintenance") markerType = GMarkerGoogleType.yellow_dot;
+
+                //    addMarker(id, lat, lng, $"{name} (Durum: {status})", markerType);
+                //}
             }
         }
+
 
 
 

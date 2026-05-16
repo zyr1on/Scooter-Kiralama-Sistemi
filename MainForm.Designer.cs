@@ -308,6 +308,7 @@
             lblBtnAddBalance.TabIndex = 10;
             lblBtnAddBalance.Text = "Bakiye Yükle";
             lblBtnAddBalance.UseVisualStyleBackColor = false;
+            lblBtnAddBalance.Click += lblBtnAddBalance_Click;
             // 
             // lblProfileTabBalance
             // 

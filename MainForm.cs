@@ -12,7 +12,7 @@ namespace Scooter_Kiralama_Sistemi
         MapHelper mapHelper = new MapHelper();
         private Users currentUser; // Giriş yapan kullanıcıyı burada tutacağız, Profil kısmı bunun üzerinden dolacak.
         private Rentals? aktifKiralama = null;
-                
+
         public MainForm(Users _user)
         {
             InitializeComponent();
@@ -41,14 +41,38 @@ namespace Scooter_Kiralama_Sistemi
             // Veritabanından kullanıcının aktif kiralamasını çekiyoruz
             aktifKiralama = DatabaseHelper.getActiveRental(currentUser.id);
 
+            // *** YENİ: SÜRE KONTROLÜ VE OTOMATİK SONLANDIRMA ***
+            if (aktifKiralama != null)
+            {
+                if (DateTime.TryParse(aktifKiralama.end_date, out DateTime bitisTarihi))
+                {
+                    // Eğer şu anki zaman, bitiş tarihini geçmişse
+                    if (DateTime.Now >= bitisTarihi)
+                    {
+                        // Admin paneli için yazdığımız metodu kullanarak kiralamayı bitir ve scooter'ı boşa çıkar
+                        DatabaseHelper.EndRental(aktifKiralama.id);
+
+                        // Haritadaki pinleri yenile (Scooter tekrar yeşil olacak)
+                        mapHelper.RefreshMapMarkers();
+
+                        // Artık aktif kiralama kalmadı, değişkeni null yapıyoruz
+                        aktifKiralama = null;
+
+                        // Kullanıcıya bilgi ver (İsteğe bağlı)
+                        MessageBox.Show("Kiralama süreniz dolduğu için işleminiz otomatik olarak sonlandırılmıştır. Scooter haritada tekrar müsait duruma geçmiştir.", "Süre Doldu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+
             // Kiralama yoksa 'hasRental' false, varsa true olacak
             bool hasRental = (aktifKiralama != null);
 
             // 1. Durum Mesajı: Kiralama YOKSA görünür olmalı, VARSA gizlenmeli
             lblAktifDurum.Visible = !hasRental;
-            lblAktifDurum.Text = "Aktif kiralamanız bulunmamaktadır."; // Tasarımdaki mesaj
+            lblAktifDurum.Text = "Aktif kiralamanız bulunmamaktadır.";
 
             // 2. Kiralama Detayları: Kiralama VARSA görünür olmalı, YOKSA gizlenmeli
+            // NOT: Tasarımdaki Label isimlerine göre burayı kendine uydurabilirsin
             lblDurumPanel.Visible = hasRental;
             pbQRKod.Visible = hasRental;
             btnQRGoster.Visible = hasRental;
@@ -60,7 +84,6 @@ namespace Scooter_Kiralama_Sistemi
                 lblBaslangicTarihi.Text = $"Başlangıç: {aktifKiralama.start_date}";
                 lblBitisTarihi.Text = $"Bitiş: {aktifKiralama.end_date}";
 
-                // Tarih parse işlemi (Hata almamak için TryParse daha güvenlidir)
                 if (DateTime.TryParse(aktifKiralama.end_date, out DateTime bitis))
                 {
                     TimeSpan fark = bitis - DateTime.Now;
@@ -69,9 +92,7 @@ namespace Scooter_Kiralama_Sistemi
                 }
 
                 lblToplamUcret.Text = $"Toplam Ücret: {aktifKiralama.total_price} TL";
-
-                // Önemli: Kiralama değiştiğinde eski QR kodunun kalmaması için PictureBox'ı temizle
-                pbQRKod.Image = null;
+                pbQRKod.Image = null; // Eski QR kodu temizle
             }
         }
 
@@ -117,5 +138,16 @@ namespace Scooter_Kiralama_Sistemi
             }
         }
 
+        private void lblBtnAddBalance_Click(object sender, EventArgs e)
+        {
+            using (BakiyeYüklemeFormu frm = new BakiyeYüklemeFormu(currentUser))
+            {
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    lblProfileTabBalance.Text = currentUser.balance.ToString();
+                }
+
+            }
+        }
     }
 }
