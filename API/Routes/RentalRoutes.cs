@@ -49,7 +49,7 @@ namespace Scooter_Kiralama_Sistemi.API.Routes
                 { ctx.AsError(400, "QR kod bu scooter ile eşleşmiyor"); return; }
 
                 // Kiralama sürecini başlat
-                var startedAt = DateTime.UtcNow;
+                var startedAt = DateTime.Now;
                 DatabaseHelper.StartRental(rental.id, startedAt);
                 DatabaseHelper.UpdateScooterStatus(scooter.Id, "rented");
 
@@ -70,7 +70,7 @@ namespace Scooter_Kiralama_Sistemi.API.Routes
                 if (rental.status != "active")
                 { ctx.AsError(400, "Kiralama henüz başlamadı"); return; }
 
-                var endedAt = DateTime.UtcNow;
+                var endedAt = DateTime.Now;
                 DatabaseHelper.EndRental(rental.id, endedAt);
                 DatabaseHelper.UpdateScooterStatus(rental.scooter_id, "available");
 
