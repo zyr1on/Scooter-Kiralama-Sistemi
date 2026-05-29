@@ -15,17 +15,20 @@ namespace Scooter_Kiralama_Sistemi
         public BakiyeYüklemeFormu(Users _user)
         {
             InitializeComponent();
-            user = _user;
+            if(!this.DesignMode)
+            {
+                user = _user;
 
-            // Form tasarımsal ayarları
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-
-            cmbTutar.Items.Clear();
-            // Kullanıcının seçebileceği sabit tutarlar
-            cmbTutar.Items.AddRange(new object[] { 50, 100, 200, 300, 500 });
-            cmbTutar.SelectedIndex = 0; // Varsayılan olarak 50 seçili gelsin
+                // Form tasarımsal ayarları
+                this.StartPosition = FormStartPosition.CenterParent;
+                this.FormBorderStyle = FormBorderStyle.FixedDialog;
+                this.MaximizeBox = false;
+    
+                cmbTutar.Items.Clear();
+                // Kullanıcının seçebileceği sabit tutarlar
+                cmbTutar.Items.AddRange(new object[] { 50, 100, 200, 300, 500 });
+                cmbTutar.SelectedIndex = 0; // Varsayılan olarak 50 seçili gelsin
+            }
 
         }
         

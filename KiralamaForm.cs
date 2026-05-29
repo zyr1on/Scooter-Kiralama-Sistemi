@@ -22,18 +22,21 @@ namespace Scooter_Kiralama_Sistemi
         public KiralamaForm(DataRow _scooter, Users _user)
         {
             InitializeComponent();
-            scooter = _scooter;
-            user = _user;
+            if(!this.DesignMode)
+            {
+                scooter = _scooter;
+                user = _user;
 
-            lblScooterName.Text = $"Scooter Adı: {scooter["name"]}";
-            lblStatus.Text = $"Scooter Durumu: {scooter["status"]}";
-            lblBattery.Text = $"Batarya: %{scooter["battery"]}";
+                lblScooterName.Text = $"Scooter Adı: {scooter["name"]}";
+                lblStatus.Text = $"Scooter Durumu: {scooter["status"]}";
+                lblBattery.Text = $"Batarya: %{scooter["battery"]}";
 
-            cmbDuration.Items.Clear();
-            cmbDuration.Items.AddRange(new object[] { 1, 3, 5, 7, 30 });
-            cmbDuration.SelectedIndex = 0; // Varsayılan olarak ilk seçeneği (1 Gün) tetikler
+                cmbDuration.Items.Clear();
+                cmbDuration.Items.AddRange(new object[] { 1, 3, 5, 7, 30 });
+                cmbDuration.SelectedIndex = 0; // Varsayılan olarak ilk seçeneği (1 Gün) tetikler
 
-            FiyatGuncelle();
+                FiyatGuncelle();
+            }
         }
 
         #endregion

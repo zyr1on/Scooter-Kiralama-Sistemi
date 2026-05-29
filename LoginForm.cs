@@ -8,9 +8,12 @@ namespace Scooter_Kiralama_Sistemi
         public LoginForm()
         {
             InitializeComponent();
-            pnlLogin.Visible = true;
-            pnlRegister.Visible = false;
-            this.AcceptButton = btnLogin;
+            if (!this.DesignMode)
+            {
+                pnlLogin.Visible = true;
+                pnlRegister.Visible = false;
+                this.AcceptButton = btnLogin;
+            }
         }
 
 

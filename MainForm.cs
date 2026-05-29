@@ -9,7 +9,7 @@ namespace Scooter_Kiralama_Sistemi
     {
         #region Değişkenler ve Tanımlamalar
 
-        MapHelper mapHelper = new MapHelper();
+        MapHelper mapHelper;
         private Users currentUser;
         private Rentals? aktifKiralama = null;
 
@@ -21,21 +21,25 @@ namespace Scooter_Kiralama_Sistemi
         {
             InitializeComponent();
 
-            tabHarita.Controls.Add(mapHelper.gmapControl);
-            mapHelper.gmapControl.Dock = DockStyle.Fill;
-            mapHelper.setupMap();
+            if (!this.DesignMode)
+            {
+                mapHelper = new MapHelper();
+                tabHarita.Controls.Add(mapHelper.gmapControl);
+                mapHelper.gmapControl.Dock = DockStyle.Fill;
+                mapHelper.setupMap();
 
-            currentUser = _user;
-            mapHelper.RefreshMapMarkers();
+                currentUser = _user;
+                mapHelper.RefreshMapMarkers();
 
-            lblProfileTabUserName.Text = lblMapTabUserName.Text = currentUser.name;
-            lblProfileTabEmail.Text = currentUser.email;
-            lblProfileTabSurname.Text = currentUser.surname;
-            lblProfileTabBalance.Text = currentUser.balance.ToString();
+                lblProfileTabUserName.Text = lblMapTabUserName.Text = currentUser.name;
+                lblProfileTabEmail.Text = currentUser.email;
+                lblProfileTabSurname.Text = currentUser.surname;
+                lblProfileTabBalance.Text = currentUser.balance.ToString();
 
-            mapHelper.gmapControl.OnMarkerClick += Harita_OnMarkerClick;
+                mapHelper.gmapControl.OnMarkerClick += Harita_OnMarkerClick;
 
-            AktifKiralamayiYukle();
+                AktifKiralamayiYukle();
+            }
         }
 
         #endregion
