@@ -2,6 +2,7 @@
 [Bb]in/
 [Oo]bj/
 
+
 !bin/Debug/net10.0-windows/scooter.png
 !bin/Release/net10.0-windows/scooter.png
 
@@ -13,3 +14,5 @@
 *.userosscache
 *.sln.docstates
 
+.DS_Store
+Thumbs.db
