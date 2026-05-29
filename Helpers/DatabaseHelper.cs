@@ -1,6 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
 using System.Data;
-using System.Data.SQLite;
 
 namespace Scooter_Kiralama_Sistemi.Helpers
 {
@@ -127,7 +126,7 @@ namespace Scooter_Kiralama_Sistemi.Helpers
 
 
                 cmd.ExecuteNonQuery();
-                
+
                 return true;
             }
             catch
@@ -398,7 +397,7 @@ namespace Scooter_Kiralama_Sistemi.Helpers
         SELECT r.*, s.name as scooter_name, s.qr_code 
         FROM Rentals r 
         JOIN Scooters s ON r.scooter_id = s.id 
-        WHERE r.user_id = @userId AND r.status = 'active' 
+        WHERE r.user_id = @userId AND r.status IN ('pending', 'active')
         LIMIT 1";
 
             cmd.Parameters.AddWithValue("@userId", userId);
@@ -412,8 +411,8 @@ namespace Scooter_Kiralama_Sistemi.Helpers
                     scooter_id = Convert.ToInt32(reader["scooter_id"]),
                     scooter_name = reader["scooter_name"].ToString(),
                     qr_code = reader["qr_code"].ToString(),
-                    start_date = reader["start_date"].ToString(),
-                    end_date = reader["end_date"].ToString(),
+                    start_date = reader["start_date"] == DBNull.Value ? null : reader["start_date"].ToString(),
+                    end_date = reader["end_date"] == DBNull.Value ? null : reader["end_date"].ToString(),
                     total_price = Convert.ToDouble(reader["total_price"]),
                     status = reader["status"].ToString()
                 };
@@ -434,11 +433,16 @@ namespace Scooter_Kiralama_Sistemi.Helpers
 
                 // 1. Rentals tablosuna yeni kiralama kaydı ekle
                 // end_date'i SQLite'ın datetime fonksiyonuyla (şu an + gün sayısı) hesaplıyoruz
+                //    cmd.CommandText = @"
+                //INSERT INTO Rentals (user_id, scooter_id, days, total_price, status, start_date, end_date) 
+                //VALUES (@uId, @sId, @days, @price, 'active', 
+                //        datetime('now', 'localtime'), 
+                //        datetime('now', 'localtime', @dayStr))";
+
                 cmd.CommandText = @"
-            INSERT INTO Rentals (user_id, scooter_id, days, total_price, status, start_date, end_date) 
-            VALUES (@uId, @sId, @days, @price, 'active', 
-                    datetime('now', 'localtime'), 
-                    datetime('now', 'localtime', @dayStr))";
+                    INSERT INTO Rentals (user_id, scooter_id, days, total_price, status) 
+                    VALUES (@uId, @sId, @days, @price, 'pending')";
+
 
                 cmd.Parameters.AddWithValue("@uId", userId);
                 cmd.Parameters.AddWithValue("@sId", scooterId);
@@ -450,7 +454,8 @@ namespace Scooter_Kiralama_Sistemi.Helpers
 
                 // 2. Scooters tablosunda scooter'ın durumunu 'rented' olarak güncelle
                 using var updateCmd = con.CreateCommand();
-                updateCmd.CommandText = "UPDATE Scooters SET status = 'rented' WHERE id = @sId";
+                //updateCmd.CommandText = "UPDATE Scooters SET status = 'rented' WHERE id = @sId";
+                updateCmd.CommandText = "UPDATE Scooters SET status = 'reserved' WHERE id = @sId";
                 updateCmd.Parameters.AddWithValue("@sId", scooterId);
                 updateCmd.ExecuteNonQuery();
 
@@ -505,7 +510,185 @@ namespace Scooter_Kiralama_Sistemi.Helpers
             }
         }
 
+        public static Users? GetUserByEmailAndPassword(string email, string password)
+                => UserLogin(email, password);
 
+        public static Users? GetUserById(int userId)
+        {
+            using var con = GetConnection();
+            con.Open();
+            using var cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT * FROM Users WHERE id = @id";
+            cmd.Parameters.AddWithValue("@id", userId);
+            using var reader = cmd.ExecuteReader();
+            if (!reader.Read()) return null;
+
+            return new Users
+            {
+                id = reader.GetInt32(reader.GetOrdinal("id")),
+                name = reader.GetString(reader.GetOrdinal("name")),
+                surname = reader.GetString(reader.GetOrdinal("surname")),
+                email = reader.GetString(reader.GetOrdinal("email")),
+                balance = reader.GetDouble(reader.GetOrdinal("balance")),
+                role = (UserRole)reader.GetInt32(reader.GetOrdinal("role"))
+            };
+        }
+
+
+        public static ScooterInfo? GetScooterByQr(string qrCode)
+        {
+            using var con = GetConnection();
+            con.Open();
+            using var cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT id, name, status, battery, lat, lng FROM Scooters WHERE qr_code = @qr";
+            cmd.Parameters.AddWithValue("@qr", qrCode);
+            using var reader = cmd.ExecuteReader();
+            if (!reader.Read()) return null;
+
+            return new ScooterInfo
+            {
+                Id = reader.GetInt32(reader.GetOrdinal("id")),
+                Name = reader.GetString(reader.GetOrdinal("name")),
+                Status = reader.GetString(reader.GetOrdinal("status")),
+                Battery = reader.GetInt32(reader.GetOrdinal("battery")),
+                Lat = reader.GetDouble(reader.GetOrdinal("lat")),
+                Lng = reader.GetDouble(reader.GetOrdinal("lng"))
+            };
+        }
+
+
+        public static bool UpdateScooterStatus(int scooterId, string status)
+        {
+            using var con = GetConnection();
+            con.Open();
+            using var cmd = con.CreateCommand();
+            cmd.CommandText = "UPDATE Scooters SET status = @status WHERE id = @id";
+            cmd.Parameters.AddWithValue("@status", status);
+            cmd.Parameters.AddWithValue("@id", scooterId);
+            return cmd.ExecuteNonQuery() > 0;
+        }
+
+
+        public static bool UpdateScooterLocation(int scooterId, double lat, double lng)
+        {
+            using var con = GetConnection();
+            con.Open();
+            using var cmd = con.CreateCommand();
+            cmd.CommandText = "UPDATE Scooters SET lat = @lat, lng = @lng WHERE id = @id";
+            cmd.Parameters.AddWithValue("@lat", lat);
+            cmd.Parameters.AddWithValue("@lng", lng);
+            cmd.Parameters.AddWithValue("@id", scooterId);
+            return cmd.ExecuteNonQuery() > 0;
+        }
+
+        //public static bool StartRental(int rentalId, DateTime startedAt)
+        //{
+        //    // Önce kaç günlük olduğunu çek
+        //    using var con = GetConnection();
+        //    con.Open();
+
+        //    using var getCmd = con.CreateCommand();
+        //    getCmd.CommandText = "SELECT days FROM Rentals WHERE id = @id";
+        //    getCmd.Parameters.AddWithValue("@id", rentalId);
+        //    var days = Convert.ToInt32(getCmd.ExecuteScalar());
+
+        //    var endDate = startedAt.AddDays(days);
+
+        //    using var cmd = con.CreateCommand();
+        //    cmd.CommandText = @"
+        //UPDATE Rentals 
+        //SET start_date = @start, end_date = @end, status = 'active'
+        //WHERE id = @id";
+        //    cmd.Parameters.AddWithValue("@start", startedAt.ToString("yyyy-MM-dd HH:mm:ss"));
+        //    cmd.Parameters.AddWithValue("@end", endDate.ToString("yyyy-MM-dd HH:mm:ss"));
+        //    cmd.Parameters.AddWithValue("@id", rentalId);
+        //    return cmd.ExecuteNonQuery() > 0;
+        //}
+
+        public static bool StartRental(int rentalId, DateTime startedAt)
+        {
+            using var con = GetConnection();
+            con.Open();
+
+            using var getCmd = con.CreateCommand();
+            getCmd.CommandText = "SELECT days FROM Rentals WHERE id = @id";
+            getCmd.Parameters.AddWithValue("@id", rentalId);
+            var days = Convert.ToInt32(getCmd.ExecuteScalar());
+
+            // C# yerel saatini UTC'ye çeviriyoruz
+            var utcStart = startedAt.ToUniversalTime();
+            var utcEnd = utcStart.AddDays(days);
+
+            using var cmd = con.CreateCommand();
+            cmd.CommandText = @"
+        UPDATE Rentals 
+        SET start_date = @start, end_date = @end, status = 'active'
+        WHERE id = @id";
+
+            cmd.Parameters.AddWithValue("@start", utcStart.ToString("o")); // ISO 8601 Formatı
+            cmd.Parameters.AddWithValue("@end", utcEnd.ToString("o"));
+            cmd.Parameters.AddWithValue("@id", rentalId);
+            return cmd.ExecuteNonQuery() > 0;
+        }
+
+
+
+        //public static bool EndRental(int rentalId, DateTime endedAt)
+        //{
+        //    using var con = GetConnection();
+        //    con.Open();
+        //    using var cmd = con.CreateCommand();
+        //    cmd.CommandText = @"
+        //UPDATE Rentals 
+        //SET end_date = @end, status = 'finished'
+        //WHERE id = @id";
+        //    cmd.Parameters.AddWithValue("@end", endedAt.ToString("yyyy-MM-dd HH:mm:ss"));
+        //    cmd.Parameters.AddWithValue("@id", rentalId);
+        //    return cmd.ExecuteNonQuery() > 0;
+        //}
+
+        public static bool EndRental(int rentalId, DateTime endedAt)
+        {
+            using var con = GetConnection();
+            con.Open();
+            using var cmd = con.CreateCommand();
+            cmd.CommandText = @"
+        UPDATE Rentals 
+        SET end_date = @end, status = 'finished'
+        WHERE id = @id";
+            cmd.Parameters.AddWithValue("@end", endedAt.ToUniversalTime().ToString("o"));
+            cmd.Parameters.AddWithValue("@id", rentalId);
+            return cmd.ExecuteNonQuery() > 0;
+        }
+
+
+
+        public static void ExpireOverdueRentals()
+        {
+            using var con = GetConnection();
+            con.Open();
+            using var cmd = con.CreateCommand();
+
+            // Süresi dolmuş aktif rentalların scooterlarını bul
+            cmd.CommandText = @"
+                SELECT r.id, r.scooter_id FROM Rentals r
+                WHERE r.status = 'active' 
+                AND r.end_date IS NOT NULL 
+                AND datetime(r.end_date) < datetime('now')"; // 'localtime' kaldırıldı!
+
+            var expired = new List<(int rentalId, int scooterId)>();
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+                expired.Add((reader.GetInt32(0), reader.GetInt32(1)));
+            reader.Close();
+
+            foreach (var (rentalId, scooterId) in expired)
+            {
+                EndRental(rentalId, DateTime.Now);
+                UpdateScooterStatus(scooterId, "available");
+                Console.WriteLine($"[Auto] Rental #{rentalId} süresi doldu, kapatıldı.");
+            }
+        }
 
 
 
@@ -518,3 +701,25 @@ namespace Scooter_Kiralama_Sistemi.Helpers
 // Users loggedInUser = DatabaseHelper.UserLogin("test@test.com", "12345");
 // loggedInUser.role == UserRole.Admin
 // loggedInUser.role == UserRole.User
+
+/*
+ 
+public static bool AddUser(string name, string surname, string email, string password, UserRole role = UserRole.User)
+
+private static bool UserExists(string email)
+public static bool DeleteUser(int userId)
+public static Users? UserLogin(string email, string password)
+private static void SeedDefaultAdmins()
+public static DataRow GetScooterById(int id)
+public static DataTable GetScooters()
+public static DataTable GetAllUsers()
+public static bool UpdateUserBalance(int userId, double amount)
+public static bool DeleteScooter(int id)
+public static bool AddScooter(string name, double lat, double lng, int battery, string qrCode)
+public static DataTable GetAllRentals()
+public static Rentals getActiveRental(int userId)
+public static bool RentScooter(int userId, int scooterId, int days, double totalPrice)
+public static bool EndRental(int rentalId)
+
+
+ */

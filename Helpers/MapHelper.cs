@@ -10,16 +10,19 @@ namespace Scooter_Kiralama_Sistemi.Helpers
     {
         private GMapControl gmap;
         private GMapOverlay overlay;
-        // bin file da scooter.png olabilir, şimdilik kök klosörde Images altında bulunuyor.
-        //public string imagePath = System.IO.Path.Combine(Application.StartupPath, "scooter.png");
-        public string imagePath = System.IO.Path.Combine(Application.StartupPath, "..\\..\\..\\Images\\scooterIcon.png");
+        public string imagePath = System.IO.Path.Combine(Application.StartupPath, "scooter.png");
         public Bitmap scooterLogo;
-        public MapHelper() {
+        public MapHelper()
+        {
 
             this.gmap = new GMapControl();
             gmap.Dock = DockStyle.Fill;
             this.overlay = new GMapOverlay("scooters");
             this.gmap.Overlays.Add(overlay);
+            // Scooter fotosu da koyulabilir marker olarak
+            // Bitmap scooterIcon = new Bitmap("scooter.png");
+            // transparent olsa daha iyi olur.
+
             if (System.IO.File.Exists(imagePath))
             {
                 scooterLogo = new Bitmap(imagePath);
@@ -55,7 +58,7 @@ namespace Scooter_Kiralama_Sistemi.Helpers
             overlay.Markers.Add(marker);
         }
 
-        
+        // YENİ: int id parametresi eklendi ve Tag'e atandı
         public void addMarker(int id, double lat, double lng, string tooltip, Bitmap bitmap)
         {
             var marker = new GMarkerGoogle(
@@ -68,7 +71,7 @@ namespace Scooter_Kiralama_Sistemi.Helpers
             overlay.Markers.Add(marker);
         }
 
-        
+        // YENİ: int id parametresi eklendi ve Tag'e atandı
         public void addMarker(int id, double lat, double lng, string tooltip, GMarkerGoogleType markertype)
         {
             var marker = new GMarkerGoogle(
@@ -87,6 +90,12 @@ namespace Scooter_Kiralama_Sistemi.Helpers
         {
             overlay.Markers.Clear();
         }
+        //public GMapControl returnGmap()
+        //{
+        //    return gmap;
+
+        //}
+
 
         public GMapControl gmapControl
         {

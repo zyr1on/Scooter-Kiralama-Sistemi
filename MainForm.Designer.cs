@@ -183,7 +183,7 @@
             lblDurumPanel.Controls.Add(lblScooterAdi);
             lblDurumPanel.Location = new Point(236, 15);
             lblDurumPanel.Name = "lblDurumPanel";
-            lblDurumPanel.Size = new Size(276, 196);
+            lblDurumPanel.Size = new Size(385, 196);
             lblDurumPanel.TabIndex = 0;
             // 
             // label8

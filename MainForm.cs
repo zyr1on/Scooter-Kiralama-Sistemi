@@ -38,62 +38,85 @@ namespace Scooter_Kiralama_Sistemi
 
         private void AktifKiralamayiYukle()
         {
-            // Veritabanından kullanıcının aktif kiralamasını çekiyoruz
             aktifKiralama = DatabaseHelper.getActiveRental(currentUser.id);
 
-            // *** YENİ: SÜRE KONTROLÜ VE OTOMATİK SONLANDIRMA ***
             if (aktifKiralama != null)
             {
-                if (DateTime.TryParse(aktifKiralama.end_date, out DateTime bitisTarihi))
+                // 1. Scooter Adını Ekrana Bas (Tasarımda label4 yazan ilk yer)
+                lblScooterAdi.Text = aktifKiralama.scooter_name;
+
+                // 2. Toplam Ücreti Ekrana Bas
+                lblToplamUcret.Text = $"{aktifKiralama.total_price} TL";
+
+                // *** DURUM KONTROLÜ (Pending / QR Bekleme Senaryosu) ***
+                if (aktifKiralama.status == "pending")
                 {
-                    // Eğer şu anki zaman, bitiş tarihini geçmişse
-                    if (DateTime.Now >= bitisTarihi)
+                    // Eğer daha QR okutulmadıysa başlangıç bellidir ama süre henüz başlamamıştır
+                    if (DateTime.TryParse(aktifKiralama.start_date, null, System.Globalization.DateTimeStyles.AdjustToUniversal, out DateTime baslangicUtc))
                     {
-                        // Admin paneli için yazdığımız metodu kullanarak kiralamayı bitir ve scooter'ı boşa çıkar
-                        DatabaseHelper.EndRental(aktifKiralama.id);
+                        lblBaslangicTarihi.Text = baslangicUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
+                    }
+                    else
+                    {
+                        lblBaslangicTarihi.Text = "Belirlenmedi";
+                    }
 
-                        // Haritadaki pinleri yenile (Scooter tekrar yeşil olacak)
+                    // QR okutulmadığı için bitiş ve kalan gün yerine uyarı yazıyoruz
+                    lblBitisTarihi.Text = "QR Okutulması Bekleniyor";
+                    lblKalanGun.Text = "Beklemede";
+
+                    // Süre dolma kontrolüne girmemesi için metottan çıkıyoruz
+                    return;
+                }
+
+                // *** SCOOTER AKTİF/RESERVED İSE (Normal Süre Hesaplama Akışı) ***
+                if (DateTime.TryParse(aktifKiralama.end_date, null, System.Globalization.DateTimeStyles.AdjustToUniversal, out DateTime bitisTarihiUtc))
+                {
+                    // Eğer şu anki zaman, bitiş tarihini geçmişse otomatik sonlandır
+                    if (DateTime.Now >= bitisTarihiUtc)
+                    {
+                        DatabaseHelper.EndRental(aktifKiralama.id, DateTime.Now);
                         mapHelper.RefreshMapMarkers();
-
-                        // Artık aktif kiralama kalmadı, değişkeni null yapıyoruz
                         aktifKiralama = null;
 
-                        // Kullanıcıya bilgi ver (İsteğe bağlı)
                         MessageBox.Show("Kiralama süreniz dolduğu için işleminiz otomatik olarak sonlandırılmıştır. Scooter haritada tekrar müsait duruma geçmiştir.", "Süre Doldu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Ekranı temizle (Her şeyi boşalt veya label4'leri temizle)
+                        TemizleKiralamaEkranı();
+                        return;
                     }
                 }
-            }
 
-            // Kiralama yoksa 'hasRental' false, varsa true olacak
-            bool hasRental = (aktifKiralama != null);
-
-            // 1. Durum Mesajı: Kiralama YOKSA görünür olmalı, VARSA gizlenmeli
-            lblAktifDurum.Visible = !hasRental;
-            lblAktifDurum.Text = "Aktif kiralamanız bulunmamaktadır.";
-
-            // 2. Kiralama Detayları: Kiralama VARSA görünür olmalı, YOKSA gizlenmeli
-            // NOT: Tasarımdaki Label isimlerine göre burayı kendine uydurabilirsin
-            lblDurumPanel.Visible = hasRental;
-            pbQRKod.Visible = hasRental;
-            btnQRGoster.Visible = hasRental;
-
-            // Eğer kiralama varsa verileri yerleştiriyoruz
-            if (hasRental)
-            {
-                lblScooterAdi.Text = $"Scooter: {aktifKiralama.scooter_name}";
-                lblBaslangicTarihi.Text = $"Başlangıç: {aktifKiralama.start_date}";
-                lblBitisTarihi.Text = $"Bitiş: {aktifKiralama.end_date}";
-
-                if (DateTime.TryParse(aktifKiralama.end_date, out DateTime bitis))
+                // Tarihleri normal şekilde labellara dolduruyoruz
+                if (DateTime.TryParse(aktifKiralama.start_date, null, System.Globalization.DateTimeStyles.AdjustToUniversal, out DateTime normalBaslangicUtc))
                 {
-                    TimeSpan fark = bitis - DateTime.Now;
-                    int kalanGun = fark.Days > 0 ? fark.Days : 0;
-                    lblKalanGun.Text = $"Kalan Gün: {kalanGun}";
+                    lblBaslangicTarihi.Text = normalBaslangicUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
                 }
 
-                lblToplamUcret.Text = $"Toplam Ücret: {aktifKiralama.total_price} TL";
-                pbQRKod.Image = null; // Eski QR kodu temizle
+                if (DateTime.TryParse(aktifKiralama.end_date, null, System.Globalization.DateTimeStyles.AdjustToUniversal, out DateTime normalBitisUtc))
+                {
+                    lblBitisTarihi.Text = normalBitisUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
+
+                    // Kalan günü tam hesapla
+                    TimeSpan kalanSure = normalBitisUtc.ToLocalTime() - DateTime.Now;
+                    lblKalanGun.Text = Math.Ceiling(kalanSure.TotalDays).ToString();
+                }
             }
+            else
+            {
+                // Aktif kiralama yoksa ekranı temiz tutalım
+                TemizleKiralamaEkranı();
+            }
+        }
+
+        // Aktif kiralama bittiğinde veya olmadığında labelların sıfırlanması için yardımcı metot
+        private void TemizleKiralamaEkranı()
+        {
+            lblScooterAdi.Text = "-";
+            lblBaslangicTarihi.Text = "-";
+            lblBitisTarihi.Text = "-";
+            lblKalanGun.Text = "-";
+            lblToplamUcret.Text = "-";
         }
 
         private void btnQRGoster_Click(object sender, EventArgs e)
