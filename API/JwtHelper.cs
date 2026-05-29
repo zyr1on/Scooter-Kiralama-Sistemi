@@ -4,17 +4,11 @@ using System.Text.Json;
 
 namespace Scooter_Kiralama_Sistemi.API
 {
-    /// <summary>
-    /// Basit imzalı token sistemi.
-    /// Gerçek JWT kütüphanesi kullanmak istersen: NuGet → System.IdentityModel.Tokens.Jwt
-    /// Ama bu proje için bu yeterli.
-    /// 
+
     /// Token formatı (Base64): header.payload.signature
-    /// </summary>
     public static class JwtHelper
     {
-        // Bunu appsettings / config'den oku production'da
-        private const string Secret = "ScooterGizliAnahtar_Degistir_2025!";
+        private const string Secret = "SCOOTERGO_SECRET_KEY_FOR_DEMO!";
 
         public static string Generate(int userId, int role)
         {
@@ -32,7 +26,7 @@ namespace Scooter_Kiralama_Sistemi.API
             return $"{header}.{body}.{sig}";
         }
 
-        /// <summary>Token geçerliyse (userId, role) döner. Geçersizse null.</summary>
+        /// <summary>Token geçerliyse (userId, role)
         public static (int UserId, int Role)? Validate(string token)
         {
             try
@@ -55,12 +49,12 @@ namespace Scooter_Kiralama_Sistemi.API
             catch { return null; }
         }
 
-        // ── Yardımcılar ──────────────────────────
-
+        // base64
         private static string B64(string input)
             => Convert.ToBase64String(Encoding.UTF8.GetBytes(input))
                       .TrimEnd('=').Replace('+', '-').Replace('/', '_');
 
+        // signature
         private static string Sign(string data)
         {
             var key = Encoding.UTF8.GetBytes(Secret);
@@ -69,6 +63,7 @@ namespace Scooter_Kiralama_Sistemi.API
             return B64(Convert.ToBase64String(hmac.ComputeHash(bytes)));
         }
 
+        // pad
         private static string Pad(string b64)
         {
             b64 = b64.Replace('-', '+').Replace('_', '/');

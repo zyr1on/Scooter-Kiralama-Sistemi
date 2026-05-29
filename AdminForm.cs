@@ -1,43 +1,42 @@
-﻿using GMap.NET.WindowsForms.Markers;
+﻿using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
 using Scooter_Kiralama_Sistemi.Helpers;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace Scooter_Kiralama_Sistemi
 {
     public partial class AdminForm : Form
     {
+        #region Değişkenler ve Tanımlamalar
+
         MapHelper mapHelper;
+
+        #endregion
+
+        #region Yapıcı Metot (Constructor)
+
         public AdminForm()
         {
             InitializeComponent();
+            
+            // harita
             mapHelper = new MapHelper();
             tabHarita.Controls.Add(mapHelper.gmapControl);
             mapHelper.setupMap();
-            mapHelper.addMarker(1, 40.22624, 28.87281, "Scooter #1", GMarkerGoogleType.red_dot);
 
+            // yönetim verileri dbden alınır
             LoadScooterData();
-            mapHelper.RefreshMapMarkers();
             LoadUserData();
             KiralamalariYukle();
-
         }
 
-        private void btnKonumSec_Click(object sender, EventArgs e)
-        {
-            var currentPos = mapHelper.gmapControl.Position;
+        #endregion
 
-
-            txtScooterLat.Text = currentPos.Lat.ToString().Replace(',', '.');
-            txtScooterLng.Text = currentPos.Lng.ToString().Replace(',', '.');
-            tabControl1.SelectedTab = tabScooterlar;
-            txtScooterName.Focus();
-        }
+        #region Veri Yükleme ve Arayüz Tazeleme Metotları (Data Loading)
 
         private void LoadScooterData()
         {
@@ -50,65 +49,16 @@ namespace Scooter_Kiralama_Sistemi
 
                 dgvScooterlar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgvScooterlar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                dgvScooterlar.ReadOnly = true; // Admin sadece baksın, değiştirmesin (değişiklik butonla yapılır)
+                dgvScooterlar.ReadOnly = true; 
+
+                // pinleri refreshle
+                mapHelper.RefreshMapMarkers();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Veriler yüklenirken hata oluştu: " + ex.Message);
+                MessageBox.Show("Scooter verileri yüklenirken hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
-        private void btnScooterEkle_Click(object sender, EventArgs e)
-        {
-            string name = txtScooterName.Text.Trim();
-            string batteryStr = txtScooterBattery.Text.Trim();
-            double lat = double.Parse(txtScooterLat.Text.Replace('.', ','));
-            double lng = double.Parse(txtScooterLng.Text.Replace('.', ','));
-            int battery = int.Parse(batteryStr);
-            string qrCodeContent = "SC-" + Guid.NewGuid().ToString().Substring(0, 5).ToUpper();
-            bool sonuc = DatabaseHelper.AddScooter(name, lat, lng, battery, qrCodeContent);
-            if (sonuc)
-            {
-                MessageBox.Show($"{name} başarıyla sisteme eklendi!\nQR Kod: {qrCodeContent}",
-                                "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
-                LoadScooterData();   // Tablo güncellensin
-                mapHelper.RefreshMapMarkers(); // Haritada yeni scooter görünsün
-
-
-                txtScooterName.Clear();
-                txtScooterBattery.Text = "100"; //varsayılan olarak batarya dolu
-            }
-            else
-                MessageBox.Show("Scooter eklenirken bir hata oluştu.");
-
-        }
-
-        private void dgvScooterlar_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                var row = dgvScooterlar.Rows[e.RowIndex];
-
-                // Koordinatların boş olup olmadığını kontrol edelim
-                if (row.Cells["lat"].Value != DBNull.Value && row.Cells["lng"].Value != DBNull.Value)
-                {
-                    double lat = Convert.ToDouble(row.Cells["lat"].Value);
-                    double lng = Convert.ToDouble(row.Cells["lng"].Value);
-
-
-                    mapHelper.gmapControl.Position = new GMap.NET.PointLatLng(lat, lng);
-                    mapHelper.gmapControl.Zoom = 18; // Yakınlaştırarak göster
-
-
-                    tabControl1.SelectedTab = tabHarita;
-                }
-            }
-        }
-
 
         private void LoadUserData()
         {
@@ -116,7 +66,6 @@ namespace Scooter_Kiralama_Sistemi
             {
                 DataTable dt = DatabaseHelper.GetAllUsers();
                 dgvKullanicilar.DataSource = dt;
-
 
                 dgvKullanicilar.Columns["id"].HeaderText = "ID";
                 dgvKullanicilar.Columns["name"].HeaderText = "Ad";
@@ -126,91 +75,166 @@ namespace Scooter_Kiralama_Sistemi
                 dgvKullanicilar.Columns["role"].HeaderText = "Rol (0:Admin, 1:User)";
                 dgvKullanicilar.Columns["created_at"].HeaderText = "Kayıt Tarihi";
 
-
+                // hash gizle
                 if (dgvKullanicilar.Columns["password_hash"] != null)
                     dgvKullanicilar.Columns["password_hash"].Visible = false;
 
                 dgvKullanicilar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgvKullanicilar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Kullanıcılar yüklenirken hata: " + ex.Message);
+                MessageBox.Show("Kullanıcılar yüklenirken hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void KiralamalariYukle()
         {
             dgvKiralamalar.DataSource = DatabaseHelper.GetAllRentals();
+            dgvKiralamalar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvKiralamalar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
+        #endregion
 
-        // Bakiye ekle butonu
-        private void btnBakiyeEkle_Click(object sender, EventArgs e)
+        #region Scooter Yönetimi Buton ve Eventleri (Scooter Management)
+
+        private void btnKonumSec_Click(object sender, EventArgs e)
         {
-            if (dgvKullanicilar.SelectedRows.Count > 0)
+            var currentPos = mapHelper.gmapControl.Position;
+
+            txtScooterLat.Text = currentPos.Lat.ToString(CultureInfo.InvariantCulture);
+            txtScooterLng.Text = currentPos.Lng.ToString(CultureInfo.InvariantCulture);
+            
+            tabControl1.SelectedTab = tabScooterlar;
+            txtScooterName.Focus();
+        }
+
+        private void btnScooterEkle_Click(object sender, EventArgs e)
+        {
+            try
             {
+                string name = txtScooterName.Text.Trim();
+                string batteryStr = txtScooterBattery.Text.Trim();
 
-                int userId = Convert.ToInt32(dgvKullanicilar.SelectedRows[0].Cells["id"].Value);
-
-
-                if (double.TryParse(txtBakiyeMiktari.Text, out double miktar))
+                if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(txtScooterLat.Text) || string.IsNullOrEmpty(txtScooterLng.Text))
                 {
-                    if (DatabaseHelper.UpdateUserBalance(userId, miktar))
-                    {
-                        MessageBox.Show("Bakiye başarıyla güncellendi.");
-                        LoadUserData(); // Tabloyu tazele
-                        txtBakiyeMiktari.Clear();
-                    }
+                    MessageBox.Show("Lütfen tüm alanları ve haritadan konumu eksiksiz doldurun.", "Eksik Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                double lat = double.Parse(txtScooterLat.Text, CultureInfo.InvariantCulture);
+                double lng = double.Parse(txtScooterLng.Text, CultureInfo.InvariantCulture);
+                int battery = int.Parse(batteryStr);
+                
+                string qrCodeContent = "SC-" + Guid.NewGuid().ToString().Substring(0, 5).ToUpper();
+                
+                bool sonuc = DatabaseHelper.AddScooter(name, lat, lng, battery, qrCodeContent);
+                if (sonuc)
+                {
+                    MessageBox.Show($"{name} başarıyla sisteme eklendi!\nQR Kod: {qrCodeContent}", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    LoadScooterData();   
+                    
+                    txtScooterName.Clear();
+                    txtScooterLat.Clear();
+                    txtScooterLng.Clear();
+                    txtScooterBattery.Text = "100";
                 }
                 else
                 {
-                    MessageBox.Show("Lütfen geçerli bir sayı giriniz.");
+                    MessageBox.Show("Scooter eklenirken bir hata oluştu.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Lütfen önce listeden bir kullanıcı seçin.");
+                MessageBox.Show("Giriş verileri hatalı: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-
-        // Scooter Sil Butonu
         private void btnScooterSil_Click(object sender, EventArgs e)
         {
             if (dgvScooterlar.SelectedRows.Count > 0)
             {
                 var row = dgvScooterlar.SelectedRows[0];
-
-
                 string durum = row.Cells["status"].Value.ToString();
+
                 if (durum != "available")
                 {
-                    MessageBox.Show($"Bu scooter şu anda '{durum}' durumunda olduğu için silemezsiniz.\nSadece müsait (available) scooterlar silinebilir.",
-                                    "İşlem Engellendi", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show($"Bu scooter şu anda '{durum}' durumunda olduğu için silemezsiniz.\nSadece müsait (available) scooterlar silinebilir.", "İşlem Engellendi", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     return;
                 }
-
 
                 int scooterId = Convert.ToInt32(row.Cells["id"].Value);
                 string scooterName = row.Cells["name"].Value.ToString();
 
-                DialogResult dialogResult = MessageBox.Show($"{scooterName} : scooteri sistemden tamamen silinecek. Onaylıyor musunuz?",
-                                                            "Scooter Silme", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult dialogResult = MessageBox.Show($"{scooterName} isimli scooter sistemden tamamen silinecek. Onaylıyor musunuz?", "Scooter Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (dialogResult == DialogResult.Yes)
                 {
                     if (DatabaseHelper.DeleteScooter(scooterId))
                     {
-                        MessageBox.Show("Scooter başarıyla silindi.");
-                        LoadScooterData();   // Tabloyu tazele
-                        mapHelper.RefreshMapMarkers(); // Haritayı güncelle
+                        MessageBox.Show("Scooter başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadScooterData(); // Hem tabloyu hem haritayı tazeler
                     }
                     else
                     {
-
-                        MessageBox.Show("Hata: Bu scooterın geçmiş kiralama kayıtları olduğu için silinemiyor.");
+                        MessageBox.Show("Hata: Bu scooterın geçmiş kiralama kayıtları olduğu için veri bütünlüğü nedeniyle silinemiyor.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Lütfen silmek istediğiniz scooterı tablodan seçin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void dgvScooterlar_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var row = dgvScooterlar.Rows[e.RowIndex];
+
+                if (row.Cells["lat"].Value != DBNull.Value && row.Cells["lng"].Value != DBNull.Value)
+                {
+                    double lat = Convert.ToDouble(row.Cells["lat"].Value);
+                    double lng = Convert.ToDouble(row.Cells["lng"].Value);
+
+                    mapHelper.gmapControl.Position = new GMap.NET.PointLatLng(lat, lng);
+                    mapHelper.gmapControl.Zoom = 18; 
+
+                    tabControl1.SelectedTab = tabHarita;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Kullanıcı Yönetimi Buton ve Eventleri (User Management)
+
+        private void btnBakiyeEkle_Click(object sender, EventArgs e)
+        {
+            if (dgvKullanicilar.SelectedRows.Count > 0)
+            {
+                int userId = Convert.ToInt32(dgvKullanicilar.SelectedRows[0].Cells["id"].Value);
+
+                if (double.TryParse(txtBakiyeMiktari.Text, out double miktar) && miktar > 0)
+                {
+                    if (DatabaseHelper.UpdateUserBalance(userId, miktar))
+                    {
+                        MessageBox.Show("Bakiye başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadUserData(); 
+                        txtBakiyeMiktari.Clear();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Lütfen geçerli ve pozitif bir sayı giriniz.", "Geçersiz Tutar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Lütfen önce listeden bir kullanıcı seçin.", "Seçim Eksik", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -220,43 +244,36 @@ namespace Scooter_Kiralama_Sistemi
             {
                 var row = dgvKullanicilar.SelectedRows[0];
 
-                // Silinecek kişinin bilgilerini ekranda göstermek için alalım
                 int userId = Convert.ToInt32(row.Cells["id"].Value);
                 string adSoyad = $"{row.Cells["name"].Value} {row.Cells["surname"].Value}";
                 string email = row.Cells["email"].Value.ToString();
 
-                // 2. Güvenlik Uyarısı (Scooter silmedeki gibi)
-                string mesaj = $"{adSoyad} ({email}) isimli kullanıcı sistemden tamamen silinecek.\n\n" +
-                               "Bu işlem geri alınamaz. Onaylıyor musunuz?";
+                string mesaj = $"{adSoyad} ({email}) isimli kullanıcı sistemden tamamen silinecek.\n\nBu işlem geri alınamaz. Onaylıyor musunuz?";
 
-                DialogResult dialogResult = MessageBox.Show(mesaj, "Kullanıcı Silme Onayı",
-                                                            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult dialogResult = MessageBox.Show(mesaj, "Kullanıcı Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (dialogResult == DialogResult.Yes)
                 {
-                    // 3. Veritabanından silmeyi dene
                     if (DatabaseHelper.DeleteUser(userId))
                     {
-                        MessageBox.Show("Kullanıcı başarıyla silindi.", "Bilgi",
-                                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        // 4. Tabloyu yenile
+                        MessageBox.Show("Kullanıcı başarıyla silindi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadUserData();
                     }
                     else
                     {
-                        // Silinememe durumunda bilgilendirme
-                        MessageBox.Show("Bu kullanıcı silinemez!\nKullanıcının geçmiş kiralama veya ödeme kayıtları mevcut olabilir.",
-                                        "İşlem Başarısız", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Bu kullanıcı silinemez!\nKullanıcının geçmiş kiralama veya ödeme kayıtları mevcut olabilir.", "İşlem Başarısız", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Lütfen silmek istediğiniz kullanıcıyı tablodan seçin.", "Uyarı",
-                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Lütfen silmek istediğiniz kullanıcıyı tablodan seçin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
+
+        #endregion
+
+        #region Kiralama Geçmişi Yönetimi (Rental Control)
 
         private void btnKiralamaSonlandir_Click(object sender, EventArgs e)
         {
@@ -266,35 +283,27 @@ namespace Scooter_Kiralama_Sistemi
                 return;
             }
 
-            // Seçili satırı al
             var seciliSatir = dgvKiralamalar.SelectedRows[0];
-
-            // Satırdaki Kiralama ID ve Durum bilgilerini al
             int kiralamaId = Convert.ToInt32(seciliSatir.Cells["Kiralama ID"].Value);
             string durum = seciliSatir.Cells["Durum"].Value.ToString();
 
-            // Kiralama zaten bitmişse işlemi durdur
             if (durum != "active")
             {
-                MessageBox.Show("Seçtiğiniz kiralama işlemi zaten sonlandırılmış!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Seçtiğiniz kiralama işlemi zaten sonlandırılmış veya tamamlanmış!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            // Emin misin diye soralım
-            var onay = MessageBox.Show("Bu kiralamayı sonlandırmak istediğinize emin misiniz? Scooter haritada tekrar müsait olarak görünecektir.",
-                                       "Kiralamayı Sonlandır",
-                                       MessageBoxButtons.YesNo,
-                                       MessageBoxIcon.Question);
+            var onay = MessageBox.Show("Bu aktif kiralamayı el ile sonlandırmak istediğinize emin misiniz? Scooter haritada tekrar müsait duruma geçecektir.", "Kiralamayı Sonlandır", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (onay == DialogResult.Yes)
             {
-                // İşlemi veritabanında gerçekleştir
                 bool basarili = DatabaseHelper.EndRental(kiralamaId);
 
                 if (basarili)
                 {
-                    MessageBox.Show("Kiralama başarıyla sonlandırıldı ve scooter boşa çıkarıldı.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    KiralamalariYukle(); // Tabloyu yenile ki yeni durum ('finished') görünsün
+                    MessageBox.Show("Kiralama admin müdahalesiyle başarıyla sonlandırıldı.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    KiralamalariYukle(); 
+                    LoadScooterData();
                 }
                 else
                 {
@@ -302,5 +311,7 @@ namespace Scooter_Kiralama_Sistemi
                 }
             }
         }
+
+        #endregion
     }
 }

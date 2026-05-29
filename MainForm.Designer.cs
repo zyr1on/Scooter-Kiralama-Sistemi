@@ -61,6 +61,7 @@
             label1 = new Label();
             pictureBox2 = new PictureBox();
             tabGecmis = new TabPage();
+            btnRefreshRental = new Button();
             tabControl1.SuspendLayout();
             tabHarita.SuspendLayout();
             panel1.SuspendLayout();
@@ -131,6 +132,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(btnRefreshRental);
             tabPage1.Controls.Add(lblAktifDurum);
             tabPage1.Controls.Add(btnQRGoster);
             tabPage1.Controls.Add(pbQRKod);
@@ -145,7 +147,7 @@
             // lblAktifDurum
             // 
             lblAktifDurum.AutoSize = true;
-            lblAktifDurum.Location = new Point(267, 328);
+            lblAktifDurum.Location = new Point(270, 357);
             lblAktifDurum.Name = "lblAktifDurum";
             lblAktifDurum.Size = new Size(196, 15);
             lblAktifDurum.TabIndex = 5;
@@ -419,6 +421,16 @@
             tabGecmis.TabIndex = 2;
             tabGecmis.Text = "Profil Geçmişi";
             // 
+            // btnRefreshRental
+            // 
+            btnRefreshRental.Location = new Point(235, 322);
+            btnRefreshRental.Name = "btnRefreshRental";
+            btnRefreshRental.Size = new Size(277, 23);
+            btnRefreshRental.TabIndex = 6;
+            btnRefreshRental.Text = "Sayfayı Yenile";
+            btnRefreshRental.UseVisualStyleBackColor = true;
+            btnRefreshRental.Click += btnRefreshRental_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -478,5 +490,6 @@
         private Label label6;
         private Label label5;
         private Label label4;
+        private Button btnRefreshRental;
     }
 }
