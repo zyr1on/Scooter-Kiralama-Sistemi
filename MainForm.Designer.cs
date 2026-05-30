@@ -159,7 +159,7 @@
             btnRefreshRental.FlatStyle = FlatStyle.Flat;
             btnRefreshRental.Location = new Point(205, 339);
             btnRefreshRental.Name = "btnRefreshRental";
-            btnRefreshRental.Size = new Size(369, 33);
+            btnRefreshRental.Size = new Size(385, 33);
             btnRefreshRental.TabIndex = 8;
             btnRefreshRental.Text = "Sayfayı Yenile";
             btnRefreshRental.UseVisualStyleBackColor = false;
@@ -171,7 +171,7 @@
             btnQRGoster.FlatStyle = FlatStyle.Flat;
             btnQRGoster.Location = new Point(205, 300);
             btnQRGoster.Name = "btnQRGoster";
-            btnQRGoster.Size = new Size(369, 33);
+            btnQRGoster.Size = new Size(385, 33);
             btnQRGoster.TabIndex = 7;
             btnQRGoster.Text = "QR Göster";
             btnQRGoster.UseVisualStyleBackColor = false;
@@ -179,7 +179,7 @@
             // lblAktifDurum
             // 
             lblAktifDurum.AutoSize = true;
-            lblAktifDurum.Location = new Point(280, 384);
+            lblAktifDurum.Location = new Point(299, 386);
             lblAktifDurum.Name = "lblAktifDurum";
             lblAktifDurum.Size = new Size(196, 15);
             lblAktifDurum.TabIndex = 5;
@@ -187,7 +187,7 @@
             // 
             // pbQRKod
             // 
-            pbQRKod.Location = new Point(236, 217);
+            pbQRKod.Location = new Point(259, 217);
             pbQRKod.Name = "pbQRKod";
             pbQRKod.Size = new Size(276, 66);
             pbQRKod.TabIndex = 1;
@@ -205,7 +205,7 @@
             lblDurumPanel.Controls.Add(lblBitisTarihi);
             lblDurumPanel.Controls.Add(lblBaslangicTarihi);
             lblDurumPanel.Controls.Add(lblScooterAdi);
-            lblDurumPanel.Location = new Point(236, 15);
+            lblDurumPanel.Location = new Point(205, 15);
             lblDurumPanel.Name = "lblDurumPanel";
             lblDurumPanel.Size = new Size(385, 196);
             lblDurumPanel.TabIndex = 0;
