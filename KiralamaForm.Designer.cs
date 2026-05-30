@@ -34,6 +34,7 @@
             cmbDuration = new ComboBox();
             btnRent = new Button();
             lblTotalPrice = new Label();
+            label1 = new Label();
             SuspendLayout();
             // 
             // lblScooterName
@@ -68,7 +69,7 @@
             cmbDuration.AutoCompleteCustomSource.AddRange(new string[] { "1", "3", "5", "7", "30" });
             cmbDuration.FormattingEnabled = true;
             cmbDuration.Items.AddRange(new object[] { "1", "3", "5", "7", "30" });
-            cmbDuration.Location = new Point(227, 196);
+            cmbDuration.Location = new Point(227, 218);
             cmbDuration.Name = "cmbDuration";
             cmbDuration.Size = new Size(136, 23);
             cmbDuration.TabIndex = 3;
@@ -76,7 +77,7 @@
             // 
             // btnRent
             // 
-            btnRent.Location = new Point(227, 266);
+            btnRent.Location = new Point(227, 282);
             btnRent.Name = "btnRent";
             btnRent.Size = new Size(123, 35);
             btnRent.TabIndex = 4;
@@ -87,17 +88,27 @@
             // lblTotalPrice
             // 
             lblTotalPrice.AutoSize = true;
-            lblTotalPrice.Location = new Point(227, 235);
+            lblTotalPrice.Location = new Point(227, 255);
             lblTotalPrice.Name = "lblTotalPrice";
             lblTotalPrice.Size = new Size(77, 15);
             lblTotalPrice.TabIndex = 5;
             lblTotalPrice.Text = "Toplam Fiyat:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(227, 188);
+            label1.Name = "label1";
+            label1.Size = new Size(32, 15);
+            label1.TabIndex = 6;
+            label1.Text = "Gün:";
             // 
             // KiralamaForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label1);
             Controls.Add(lblTotalPrice);
             Controls.Add(btnRent);
             Controls.Add(cmbDuration);
@@ -118,5 +129,6 @@
         private ComboBox cmbDuration;
         private Button btnRent;
         private Label lblTotalPrice;
+        private Label label1;
     }
 }

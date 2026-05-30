@@ -244,6 +244,9 @@
             // 
             // dgvScooterlar
             // 
+            dgvScooterlar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvScooterlar.BackgroundColor = Color.White;
+            dgvScooterlar.BorderStyle = BorderStyle.None;
             dgvScooterlar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvScooterlar.Dock = DockStyle.Left;
             dgvScooterlar.Location = new Point(3, 3);
@@ -324,6 +327,9 @@
             // 
             // dgvKullanicilar
             // 
+            dgvKullanicilar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvKullanicilar.BackgroundColor = Color.White;
+            dgvKullanicilar.BorderStyle = BorderStyle.None;
             dgvKullanicilar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvKullanicilar.Dock = DockStyle.Left;
             dgvKullanicilar.Location = new Point(3, 3);
@@ -354,7 +360,7 @@
             // 
             // btnKiralamaSonlandir
             // 
-            btnKiralamaSonlandir.Location = new Point(3, 15);
+            btnKiralamaSonlandir.Location = new Point(0, 14);
             btnKiralamaSonlandir.Name = "btnKiralamaSonlandir";
             btnKiralamaSonlandir.Size = new Size(195, 30);
             btnKiralamaSonlandir.TabIndex = 0;
@@ -364,6 +370,10 @@
             // 
             // dgvKiralamalar
             // 
+            dgvKiralamalar.AccessibleRole = AccessibleRole.None;
+            dgvKiralamalar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvKiralamalar.BackgroundColor = Color.White;
+            dgvKiralamalar.BorderStyle = BorderStyle.None;
             dgvKiralamalar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvKiralamalar.Dock = DockStyle.Fill;
             dgvKiralamalar.Location = new Point(0, 0);

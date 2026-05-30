@@ -36,8 +36,8 @@
             pictureBox1 = new PictureBox();
             tabPage1 = new TabPage();
             btnRefreshRental = new Button();
-            lblAktifDurum = new Label();
             btnQRGoster = new Button();
+            lblAktifDurum = new Label();
             pbQRKod = new PictureBox();
             lblDurumPanel = new Panel();
             label8 = new Label();
@@ -139,46 +139,51 @@
             // 
             // tabPage1
             // 
+            tabPage1.BackColor = Color.FromArgb(10, 26, 58);
             tabPage1.Controls.Add(btnRefreshRental);
-            tabPage1.Controls.Add(lblAktifDurum);
             tabPage1.Controls.Add(btnQRGoster);
+            tabPage1.Controls.Add(lblAktifDurum);
             tabPage1.Controls.Add(pbQRKod);
             tabPage1.Controls.Add(lblDurumPanel);
+            tabPage1.ForeColor = Color.White;
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Size = new Size(792, 422);
             tabPage1.TabIndex = 3;
             tabPage1.Text = "Aktif Kiralama";
-            tabPage1.UseVisualStyleBackColor = true;
             // 
             // btnRefreshRental
             // 
-            btnRefreshRental.Location = new Point(235, 322);
+            btnRefreshRental.BackColor = Color.FromArgb(96, 165, 250);
+            btnRefreshRental.FlatAppearance.BorderSize = 0;
+            btnRefreshRental.FlatStyle = FlatStyle.Flat;
+            btnRefreshRental.Location = new Point(205, 339);
             btnRefreshRental.Name = "btnRefreshRental";
-            btnRefreshRental.Size = new Size(277, 23);
-            btnRefreshRental.TabIndex = 6;
+            btnRefreshRental.Size = new Size(369, 33);
+            btnRefreshRental.TabIndex = 8;
             btnRefreshRental.Text = "Sayfayı Yenile";
-            btnRefreshRental.UseVisualStyleBackColor = true;
-            btnRefreshRental.Click += btnRefreshRental_Click;
+            btnRefreshRental.UseVisualStyleBackColor = false;
+            // 
+            // btnQRGoster
+            // 
+            btnQRGoster.BackColor = Color.FromArgb(96, 165, 250);
+            btnQRGoster.FlatAppearance.BorderSize = 0;
+            btnQRGoster.FlatStyle = FlatStyle.Flat;
+            btnQRGoster.Location = new Point(205, 300);
+            btnQRGoster.Name = "btnQRGoster";
+            btnQRGoster.Size = new Size(369, 33);
+            btnQRGoster.TabIndex = 7;
+            btnQRGoster.Text = "QR Göster";
+            btnQRGoster.UseVisualStyleBackColor = false;
             // 
             // lblAktifDurum
             // 
             lblAktifDurum.AutoSize = true;
-            lblAktifDurum.Location = new Point(270, 357);
+            lblAktifDurum.Location = new Point(280, 384);
             lblAktifDurum.Name = "lblAktifDurum";
             lblAktifDurum.Size = new Size(196, 15);
             lblAktifDurum.TabIndex = 5;
             lblAktifDurum.Text = "Aktif kiralamanız bulunmamaktadır.";
-            // 
-            // btnQRGoster
-            // 
-            btnQRGoster.Location = new Point(235, 293);
-            btnQRGoster.Name = "btnQRGoster";
-            btnQRGoster.Size = new Size(277, 23);
-            btnQRGoster.TabIndex = 2;
-            btnQRGoster.Text = "QR Göster";
-            btnQRGoster.UseVisualStyleBackColor = true;
-            btnQRGoster.Click += btnQRGoster_Click;
             // 
             // pbQRKod
             // 
@@ -208,6 +213,7 @@
             // label8
             // 
             label8.AutoSize = true;
+            label8.ForeColor = Color.White;
             label8.Location = new Point(17, 134);
             label8.Name = "label8";
             label8.Size = new Size(80, 15);
@@ -217,6 +223,7 @@
             // label7
             // 
             label7.AutoSize = true;
+            label7.ForeColor = Color.White;
             label7.Location = new Point(17, 110);
             label7.Name = "label7";
             label7.Size = new Size(64, 15);
@@ -226,6 +233,7 @@
             // label6
             // 
             label6.AutoSize = true;
+            label6.ForeColor = Color.White;
             label6.Location = new Point(17, 82);
             label6.Name = "label6";
             label6.Size = new Size(32, 15);
@@ -235,6 +243,7 @@
             // label5
             // 
             label5.AutoSize = true;
+            label5.ForeColor = Color.White;
             label5.Location = new Point(17, 57);
             label5.Name = "label5";
             label5.Size = new Size(60, 15);
@@ -244,6 +253,7 @@
             // label4
             // 
             label4.AutoSize = true;
+            label4.ForeColor = Color.White;
             label4.Location = new Point(17, 32);
             label4.Name = "label4";
             label4.Size = new Size(71, 15);
@@ -253,6 +263,7 @@
             // lblToplamUcret
             // 
             lblToplamUcret.AutoSize = true;
+            lblToplamUcret.ForeColor = Color.White;
             lblToplamUcret.Location = new Point(143, 134);
             lblToplamUcret.Name = "lblToplamUcret";
             lblToplamUcret.Size = new Size(38, 15);
@@ -262,6 +273,7 @@
             // lblKalanGun
             // 
             lblKalanGun.AutoSize = true;
+            lblKalanGun.ForeColor = Color.White;
             lblKalanGun.Location = new Point(143, 110);
             lblKalanGun.Name = "lblKalanGun";
             lblKalanGun.Size = new Size(38, 15);
@@ -271,6 +283,7 @@
             // lblBitisTarihi
             // 
             lblBitisTarihi.AutoSize = true;
+            lblBitisTarihi.ForeColor = Color.White;
             lblBitisTarihi.Location = new Point(143, 82);
             lblBitisTarihi.Name = "lblBitisTarihi";
             lblBitisTarihi.Size = new Size(38, 15);
@@ -280,6 +293,7 @@
             // lblBaslangicTarihi
             // 
             lblBaslangicTarihi.AutoSize = true;
+            lblBaslangicTarihi.ForeColor = Color.White;
             lblBaslangicTarihi.Location = new Point(143, 57);
             lblBaslangicTarihi.Name = "lblBaslangicTarihi";
             lblBaslangicTarihi.Size = new Size(38, 15);
@@ -289,6 +303,7 @@
             // lblScooterAdi
             // 
             lblScooterAdi.AutoSize = true;
+            lblScooterAdi.ForeColor = Color.White;
             lblScooterAdi.Location = new Point(143, 32);
             lblScooterAdi.Name = "lblScooterAdi";
             lblScooterAdi.Size = new Size(38, 15);
@@ -444,13 +459,15 @@
             // 
             // btnRefreshProfileHistory
             // 
-            btnRefreshProfileHistory.Location = new Point(669, 371);
+            btnRefreshProfileHistory.BackColor = Color.FromArgb(96, 165, 250);
+            btnRefreshProfileHistory.FlatAppearance.BorderSize = 0;
+            btnRefreshProfileHistory.FlatStyle = FlatStyle.Flat;
+            btnRefreshProfileHistory.Location = new Point(581, 374);
             btnRefreshProfileHistory.Name = "btnRefreshProfileHistory";
-            btnRefreshProfileHistory.Size = new Size(117, 23);
-            btnRefreshProfileHistory.TabIndex = 3;
+            btnRefreshProfileHistory.Size = new Size(203, 33);
+            btnRefreshProfileHistory.TabIndex = 5;
             btnRefreshProfileHistory.Text = "Sayfayı Yenile";
-            btnRefreshProfileHistory.UseVisualStyleBackColor = true;
-            btnRefreshProfileHistory.Click += btnRefreshProfileHistory_Click;
+            btnRefreshProfileHistory.UseVisualStyleBackColor = false;
             // 
             // lblToplamHarcama
             // 
@@ -474,11 +491,14 @@
             // 
             // dataGridView1
             // 
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.BackgroundColor = Color.FromArgb(10, 26, 58);
+            dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(3, 0);
+            dataGridView1.Dock = DockStyle.Top;
+            dataGridView1.Location = new Point(3, 3);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(793, 331);
+            dataGridView1.Size = new Size(786, 133);
             dataGridView1.TabIndex = 0;
             // 
             // MainForm
@@ -536,17 +556,17 @@
         private Label lblBaslangicTarihi;
         private Label lblScooterAdi;
         private Label lblAktifDurum;
-        private Button btnQRGoster;
         private PictureBox pbQRKod;
         private Label label8;
         private Label label7;
         private Label label6;
         private Label label5;
         private Label label4;
-        private Button btnRefreshRental;
         private Label lblToplamKiralama;
         private DataGridView dataGridView1;
         private Label lblToplamHarcama;
         private Button btnRefreshProfileHistory;
+        private Button btnRefreshRental;
+        private Button btnQRGoster;
     }
 }

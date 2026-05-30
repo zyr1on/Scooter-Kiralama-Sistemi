@@ -158,7 +158,18 @@ namespace Scooter_Kiralama_Sistemi
         }
 
         // event handler'lar
-        private void btnQRGoster_Click(object sender, EventArgs e) => pbQRKod.Image = QRHelper.GenerateQR(_activeRental?.qr_code);
+        private void btnQRGoster_Click(object sender, EventArgs e)
+        {
+            if (_activeRental == null)
+            {
+                MessageBox.Show("Aktif bir kiralamanız bulunmadığı için QR kod oluşturulamıyor.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var qrBitmap = QRHelper.GenerateQR(_activeRental.qr_code);
+            pbQRKod.Image = qrBitmap;
+            pbQRKod.SizeMode = PictureBoxSizeMode.Zoom;
+        }
         private void lblBtnAddBalance_Click(object sender, EventArgs e) { if (new BakiyeYüklemeFormu(_currentUser).ShowDialog() == DialogResult.OK) LoadProfileDetails(); }
         private void btnRefreshRental_Click(object sender, EventArgs e) => RefreshActiveRental();
         private void btnRefreshProfileHistory_Click(object sender, EventArgs e) => LoadRentalHistory();

@@ -28,6 +28,8 @@ namespace Scooter_Kiralama_Sistemi
             lblStatus.Text = $"Durum: {_scooter["status"]}";
             lblBattery.Text = $"Batarya: %{_scooter["battery"]}";
 
+
+            cmbDuration.Items.Clear();
             cmbDuration.Items.AddRange(new object[] { 1, 3, 5, 7, 30 });
             cmbDuration.SelectedIndex = 0;
             UpdatePrice();
