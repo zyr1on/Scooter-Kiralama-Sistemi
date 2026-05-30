@@ -1,105 +1,95 @@
 ﻿using Scooter_Kiralama_Sistemi.Helpers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 
 namespace Scooter_Kiralama_Sistemi
 {
     public partial class BakiyeYüklemeFormu : Form
     {
-        private Users user;
-        public BakiyeYüklemeFormu(Users _user)
+        private Users _user;
+
+        public BakiyeYüklemeFormu(Users user)
         {
             InitializeComponent();
-            if(!this.DesignMode)
-            {
-                user = _user;
+            if (this.DesignMode) return;
 
-                // Form tasarımsal ayarları
-                this.StartPosition = FormStartPosition.CenterParent;
-                this.FormBorderStyle = FormBorderStyle.FixedDialog;
-                this.MaximizeBox = false;
-    
-                cmbTutar.Items.Clear();
-                // Kullanıcının seçebileceği sabit tutarlar
-                cmbTutar.Items.AddRange(new object[] { 50, 100, 200, 300, 500 });
-                cmbTutar.SelectedIndex = 0; // Varsayılan olarak 50 seçili gelsin
-            }
-
+            _user = user;
+            InitializeUI();
         }
-        
 
-        private bool LuhnKontrol(string kartNo)
+        // form arayüzünü hazırla
+        private void InitializeUI()
         {
-            // Boşlukları ve tireleri temizle
-            kartNo = kartNo.Replace(" ", "").Replace("-", "");
+            this.StartPosition = FormStartPosition.CenterParent;
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
 
-            // Sadece sayı mı ve uzunluğu mantıklı mı kontrolü (Genelde 16 hanedir)
-            if (!long.TryParse(kartNo, out _) || kartNo.Length < 13 || kartNo.Length > 19)
+            cmbTutar.Items.AddRange(new object[] { 50, 100, 200, 300, 500 });
+            cmbTutar.SelectedIndex = 0;
+        }
+
+        // luhn algoritması ile kart doğrula
+        private bool IsCardValid(string cardNumber)
+        {
+            string cleanNumber = cardNumber.Replace(" ", "").Replace("-", "");
+
+            if (!long.TryParse(cleanNumber, out _) || cleanNumber.Length < 13 || cleanNumber.Length > 19)
                 return false;
 
-            int toplam = 0;
-            bool ciftMi = false;
+            int total = 0;
+            bool isDouble = false;
 
-            // String'i tersten okuyoruz
-            for (int i = kartNo.Length - 1; i >= 0; i--)
+            for (int i = cleanNumber.Length - 1; i >= 0; i--)
             {
-                int rakam = kartNo[i] - '0'; // Char'ı integer'a hızlı çevirme
+                int digit = cleanNumber[i] - '0';
 
-                if (ciftMi)
+                if (isDouble)
                 {
-                    rakam *= 2;
-                    if (rakam > 9)
-                    {
-                        rakam -= 9; // 18 çıkarsa 1+8=9 yapmak yerine direkt 9 çıkartıyoruz
-                    }
+                    digit *= 2;
+                    if (digit > 9) digit -= 9;
                 }
 
-                toplam += rakam;
-                ciftMi = !ciftMi;
+                total += digit;
+                isDouble = !isDouble;
             }
 
-            // Toplam 10'a tam bölünüyorsa kart numarası geçerlidir
-            return (toplam % 10 == 0);
+            return (total % 10 == 0);
         }
 
-
+        // bakiye yükleme işlemini yönet
         private void btnYukle_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtKartNo.Text) ||
-                    string.IsNullOrWhiteSpace(txtTarih.Text) ||
-                    string.IsNullOrWhiteSpace(txtCvv.Text))
+                string.IsNullOrWhiteSpace(txtTarih.Text) ||
+                string.IsNullOrWhiteSpace(txtCvv.Text))
             {
-                MessageBox.Show("Lütfen tüm kart bilgilerini eksiksiz doldurun.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Lütfen tüm alanları doldurun.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (!LuhnKontrol(txtKartNo.Text))
+
+            if (!IsCardValid(txtKartNo.Text))
             {
-                MessageBox.Show("Geçersiz bir kredi kartı numarası girdiniz! Lütfen kontrol edin.", "Kart Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; // Hatalıysa işlemi anında durdur
+                MessageBox.Show("Geçersiz kredi kartı numarası.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            if (cmbTutar.SelectedItem == null) return;
-            double eklenecekTutar = Convert.ToDouble(cmbTutar.SelectedItem);
-            bool basarili = DatabaseHelper.UpdateUserBalance(user.id, eklenecekTutar);
-            if (basarili)
+
+            ProcessBalanceUpdate();
+        }
+
+        // veritabanı bakiye güncellemesini gerçekleştir
+        private void ProcessBalanceUpdate()
+        {
+            double amount = Convert.ToDouble(cmbTutar.SelectedItem);
+
+            if (DatabaseHelper.UpdateUserBalance(_user.id, amount))
             {
-                // 4. Geçerli kullanıcı nesnesinin bakiyesini güncelle
-                user.balance += eklenecekTutar;
-
-                MessageBox.Show($"{eklenecekTutar} TL bakiyeniz başarıyla yüklendi!", "İşlem Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                _user.balance += amount;
+                MessageBox.Show($"{amount} TL başarıyla yüklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Bakiye yüklenirken sistemsel bir hata oluştu.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Sistemsel bir hata oluştu.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Scooter_Kiralama_Sistemi.API.Routes
             // Dönüş: { active: bool, rental: { ... } }
             router.Get("/me/rental", ctx =>
             {
-                var rental = DatabaseHelper.getActiveRental(ctx.UserId);
+                var rental = DatabaseHelper.GetActiveRental(ctx.UserId);
 
                 if (rental == null)
                 { ctx.AsJson(new { active = false }); return; }
@@ -33,7 +33,7 @@ namespace Scooter_Kiralama_Sistemi.API.Routes
                 { ctx.AsError(400, "QR kod gerekli"); return; }
 
                 // Kullanıcının atanmış aktif kiralması var mı?
-                var rental = DatabaseHelper.getActiveRental(ctx.UserId);
+                var rental = DatabaseHelper.GetActiveRental(ctx.UserId);
 
                 if (rental == null)
                 { ctx.AsError(404, "Size atanmış bir kiralama bulunamadı"); return; }
@@ -62,7 +62,7 @@ namespace Scooter_Kiralama_Sistemi.API.Routes
             // Dönüş: { success: true, ended_at: "...", total_price: 0.0 }
             router.Post("/rental/end", ctx =>
             {
-                var rental = DatabaseHelper.getActiveRental(ctx.UserId);
+                var rental = DatabaseHelper.GetActiveRental(ctx.UserId);
 
                 if (rental == null)
                 { ctx.AsError(404, "Aktif kiralama bulunamadı"); return; }

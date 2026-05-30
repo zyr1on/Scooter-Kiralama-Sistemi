@@ -13,7 +13,7 @@ namespace Scooter_Kiralama_Sistemi.API.Routes
             {
                 var body = ctx.BodyAs<LocationRequest>();
 
-                var rental = DatabaseHelper.getActiveRental(ctx.UserId);
+                var rental = DatabaseHelper.GetActiveRental(ctx.UserId);
 
                 if (rental == null || rental.status != "active")
                 { ctx.AsError(400, "Aktif kiralama yok"); return; }

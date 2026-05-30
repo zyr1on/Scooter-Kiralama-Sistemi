@@ -35,6 +35,7 @@
             lblMapTabUserName = new Label();
             pictureBox1 = new PictureBox();
             tabPage1 = new TabPage();
+            btnRefreshRental = new Button();
             lblAktifDurum = new Label();
             btnQRGoster = new Button();
             pbQRKod = new PictureBox();
@@ -61,7 +62,10 @@
             label1 = new Label();
             pictureBox2 = new PictureBox();
             tabGecmis = new TabPage();
-            btnRefreshRental = new Button();
+            btnRefreshProfileHistory = new Button();
+            lblToplamHarcama = new Label();
+            lblToplamKiralama = new Label();
+            dataGridView1 = new DataGridView();
             tabControl1.SuspendLayout();
             tabHarita.SuspendLayout();
             panel1.SuspendLayout();
@@ -71,6 +75,8 @@
             lblDurumPanel.SuspendLayout();
             tabProfil.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            tabGecmis.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -85,6 +91,7 @@
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(800, 450);
             tabControl1.TabIndex = 0;
+            tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
             // tabHarita
             // 
@@ -143,6 +150,16 @@
             tabPage1.TabIndex = 3;
             tabPage1.Text = "Aktif Kiralama";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnRefreshRental
+            // 
+            btnRefreshRental.Location = new Point(235, 322);
+            btnRefreshRental.Name = "btnRefreshRental";
+            btnRefreshRental.Size = new Size(277, 23);
+            btnRefreshRental.TabIndex = 6;
+            btnRefreshRental.Text = "Sayfayı Yenile";
+            btnRefreshRental.UseVisualStyleBackColor = true;
+            btnRefreshRental.Click += btnRefreshRental_Click;
             // 
             // lblAktifDurum
             // 
@@ -414,6 +431,10 @@
             // tabGecmis
             // 
             tabGecmis.BackColor = Color.FromArgb(10, 26, 58);
+            tabGecmis.Controls.Add(btnRefreshProfileHistory);
+            tabGecmis.Controls.Add(lblToplamHarcama);
+            tabGecmis.Controls.Add(lblToplamKiralama);
+            tabGecmis.Controls.Add(dataGridView1);
             tabGecmis.Location = new Point(4, 24);
             tabGecmis.Name = "tabGecmis";
             tabGecmis.Padding = new Padding(3);
@@ -421,15 +442,44 @@
             tabGecmis.TabIndex = 2;
             tabGecmis.Text = "Profil Geçmişi";
             // 
-            // btnRefreshRental
+            // btnRefreshProfileHistory
             // 
-            btnRefreshRental.Location = new Point(235, 322);
-            btnRefreshRental.Name = "btnRefreshRental";
-            btnRefreshRental.Size = new Size(277, 23);
-            btnRefreshRental.TabIndex = 6;
-            btnRefreshRental.Text = "Sayfayı Yenile";
-            btnRefreshRental.UseVisualStyleBackColor = true;
-            btnRefreshRental.Click += btnRefreshRental_Click;
+            btnRefreshProfileHistory.Location = new Point(669, 371);
+            btnRefreshProfileHistory.Name = "btnRefreshProfileHistory";
+            btnRefreshProfileHistory.Size = new Size(117, 23);
+            btnRefreshProfileHistory.TabIndex = 3;
+            btnRefreshProfileHistory.Text = "Sayfayı Yenile";
+            btnRefreshProfileHistory.UseVisualStyleBackColor = true;
+            btnRefreshProfileHistory.Click += btnRefreshProfileHistory_Click;
+            // 
+            // lblToplamHarcama
+            // 
+            lblToplamHarcama.AutoSize = true;
+            lblToplamHarcama.ForeColor = Color.White;
+            lblToplamHarcama.Location = new Point(34, 383);
+            lblToplamHarcama.Name = "lblToplamHarcama";
+            lblToplamHarcama.Size = new Size(38, 15);
+            lblToplamHarcama.TabIndex = 2;
+            lblToplamHarcama.Text = "label9";
+            // 
+            // lblToplamKiralama
+            // 
+            lblToplamKiralama.AutoSize = true;
+            lblToplamKiralama.ForeColor = Color.White;
+            lblToplamKiralama.Location = new Point(34, 353);
+            lblToplamKiralama.Name = "lblToplamKiralama";
+            lblToplamKiralama.Size = new Size(38, 15);
+            lblToplamKiralama.TabIndex = 1;
+            lblToplamKiralama.Text = "label9";
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(3, 0);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(793, 331);
+            dataGridView1.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -453,6 +503,9 @@
             tabProfil.ResumeLayout(false);
             tabProfil.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            tabGecmis.ResumeLayout(false);
+            tabGecmis.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
@@ -491,5 +544,9 @@
         private Label label5;
         private Label label4;
         private Button btnRefreshRental;
+        private Label lblToplamKiralama;
+        private DataGridView dataGridView1;
+        private Label lblToplamHarcama;
+        private Button btnRefreshProfileHistory;
     }
 }
