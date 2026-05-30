@@ -87,3 +87,8 @@ API ile ilgili endpointler, istek örnekleri ve kullanım detayları için **[AP
 * `BatteryScooterMarker.cs` : Harita üzerinde scooter işaretçilerinin gösterimi.
 * `QRHelper.cs` : QR kod oluşturma ve doğrulama işlemleri.
 * `JwtHelper.cs` : JWT oluşturma ve doğrulama işlemleri.
+
+
+
+<img width="1440" height="1240" alt="image" src="https://github.com/user-attachments/assets/efdf0cad-96c5-4dc4-b666-616860d8181e" />
+
