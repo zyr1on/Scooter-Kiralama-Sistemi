@@ -90,5 +90,6 @@ API ile ilgili endpointler, istek örnekleri ve kullanım detayları için **[AP
 
 
 
-<img width="1440" height="1240" alt="image" src="https://github.com/user-attachments/assets/efdf0cad-96c5-4dc4-b666-616860d8181e" />
+<img width="1440" height="1880" alt="image" src="https://github.com/user-attachments/assets/451b1fab-916f-4c7d-9b42-65949b12ee63" />
+
 
